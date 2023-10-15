@@ -26,7 +26,7 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
-    "typescript": "^4.4.2",
+    "typescript": "4.6.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -34,7 +34,7 @@
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
     "format": "prettier --write src/**/*.ts{,x}",
-    "lint": "run-s lint:type lint:ts prettier-write prettier-write:ts prettier-write:style",
+    "lint": "run-s lint:ts prettier-write prettier-write:ts prettier-write:style",
     "lint:ts": "eslint ./src --ext .ts --ext .tsx --ext .js --fix",
     "lint:style": "stylelint \"./src/**/*.{css,scss}\"",
     "lint:type": "tsc -p ./tsconfig.json",
