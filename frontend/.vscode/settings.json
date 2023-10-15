@@ -9,11 +9,9 @@
   "less.validate": false,
   "scss.validate": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": true,
-    "source.organizeImports": true
+    "source.fixAll.stylelint": true
   },
   "editor.bracketPairColorization.enabled": true,
-  "swaggerViewer.previewInBrowser": true,
   "stylelint.validate": [
     "css",
     "scss"

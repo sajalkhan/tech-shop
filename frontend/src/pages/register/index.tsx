@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Users: React.FC = () => {
-  return <div className="p-users">user page</div>;
+  return <div className="p-register">Register</div>;
 };
 
 export default Users;

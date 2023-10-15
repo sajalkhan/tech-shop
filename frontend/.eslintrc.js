@@ -52,7 +52,7 @@ module.exports = {
     'no-alert': 2,
     'no-array-constructor': 2,
     'no-caller': 2,
-    'no-console': 2,
+    'no-console': 0,
     'no-debugger': 0,
     'no-dupe-class-members': 2,
     'no-eq-null': 2,

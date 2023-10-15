@@ -3,15 +3,13 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('pages/home'));
-const Users = lazy(() => import('pages/users'));
-// const NotFound = lazy(() => import('pages/not-found'));
+const Register = lazy(() => import('pages/register'));
 
 export const PagesRoutes: React.FC = () => (
   <Suspense fallback="Loading...">
     <Routes>
       <Route path={ROUTES.HOME} element={<Home />} />
-      <Route path={ROUTES.USERS} element={<Users />} />
-      {/* <Route component={<NotFound />} /> */}
+      <Route path={ROUTES.REGISTER} element={<Register />} />
     </Routes>
   </Suspense>
 );

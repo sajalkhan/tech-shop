@@ -1,13 +1,7 @@
-import Text from 'components/atoms/text';
 import React from 'react';
 
 const Home: React.FC = () => {
-  return (
-    <div>
-      Home
-      <Text />
-    </div>
-  );
+  return <div className="p-home">Home</div>;
 };
 
 export default Home;
