@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "paths": {
+      "@root/*": ["./*"],
+      "libs": ["./src/libs/*"],
+      "pages": ["./src/pages/*"],
+      "assets": ["./src/assets/*"],
+      "constants": ["./src/constants/*"],
+      "components": ["./src/components/*"],
+    }
+  },
+  "include": ["src", "config-overrides.js"],
+  "exclude": ["node_modules", "build", "scripts"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@mixin clearfix {
+  &:after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+}
+
+@mixin pc() {
+  @media (min-width: ($breakpoint-sp + 1)) {
+    @content;
+  }
+}
+
+@mixin sp() {
+  @media (max-width: $breakpoint-sp) {
+    @content;
+  }
+}
+
+//  Media screen 1025 and above
+@mixin wide-pc {
+  @media (min-width: ($breakpoint-small-pc + 1)) {
+    @content;
+  }
+}
+
+// Media screen 769-1024
+@mixin small-pc() {
+  @media (max-width: $breakpoint-small-pc) and (min-width: ($breakpoint-sp + 1)) {
+    @content;
+  }
+}
+
+@mixin flex-spac-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin sprite-icon() {
+  background-position: 0% center;
+  background-size: 200% 100%;
+}
+@mixin sprite-icon-active() {
+  background-position: 100% center;
+}
