@@ -1,8 +1,8 @@
+import Logger from 'bunyan';
 import express, { Express } from 'express';
 import { config } from '@root/config';
 import { techShopServer } from '@root/setupServer';
 import { ConnectDatabase } from '@root/setupDatabase';
-import Logger from 'bunyan';
 
 const log: Logger = config.createLogger('app');
 class Application {
