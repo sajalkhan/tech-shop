@@ -10,6 +10,8 @@ const userSchema: Schema = new Schema(
     uId: { type: String },
     email: { type: String },
     password: { type: String },
+    role: { type: String, default: 'subscriber' },
+    cart: { type: Array<string>, default: [] },
     createdAt: { type: Date, default: Date.now },
     passwordResetToken: { type: String, default: '' },
     passwordResetExpires: { type: Number }

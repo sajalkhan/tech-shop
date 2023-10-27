@@ -40,7 +40,6 @@ export class SignIn {
     req.session = { jwt: userJwt };
     const userDocument: IUserDocument = {
       ...user,
-      authId: existingUser!._id,
       username: existingUser!.username,
       email: existingUser!.email,
       uId: existingUser!.uId,

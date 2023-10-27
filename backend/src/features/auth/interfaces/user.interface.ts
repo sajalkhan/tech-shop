@@ -10,19 +10,19 @@ declare global {
 }
 
 export interface AuthPayload {
-  userId: string;
   uId: string;
   email: string;
+  userId: string;
   username: string;
-  iat?: number;
 }
 
 export interface IUserDocument extends Document {
   _id: string | ObjectId;
   uId: string;
-  authId: string;
-  username: string;
+  role?: string;
+  cart?: string[];
   email: string;
+  username: string;
   password?: string;
   createdAt: Date;
   passwordResetToken?: string;
