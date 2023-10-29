@@ -20,7 +20,7 @@ class Config {
   public SMTP_USER: string | undefined;
   public SMTP_PASSWORD: string | undefined;
 
-  private readonly DEFAULT_DATABASE_URL = `mongodb://mdsoharubhossen:${this.DB_PASSWORD}@ac-w2u3ez4-shard-00-00.dvtskkd.mongodb.net:27017,ac-w2u3ez4-shard-00-01.dvtskkd.mongodb.net:27017,ac-w2u3ez4-shard-00-02.dvtskkd.mongodb.net:27017/?ssl=true&replicaSet=atlas-32r444-shard-0&authSource=admin&retryWrites=true&w=majority`;
+  private readonly DEFAULT_DATABASE_URL = `mongodb+srv://mdsoharubhossen:${this.DB_PASSWORD}@cluster0.0kgkxcm.mongodb.net/?retryWrites=true&w=majority`;
 
   constructor() {
     this.DB_PASSWORD = process.env.DB_PASSWORD || this.DB_PASSWORD;

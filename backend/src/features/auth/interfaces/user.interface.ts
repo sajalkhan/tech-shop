@@ -25,6 +25,7 @@ export interface IUserDocument extends Document {
   username: string;
   password?: string;
   createdAt: Date;
+  avatarImage?: string;
   passwordResetToken?: string;
   passwordResetExpires?: number | string;
   comparePassword(password: string): Promise<boolean>;

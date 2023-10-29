@@ -12,6 +12,7 @@ const userSchema: Schema = new Schema(
     password: { type: String },
     role: { type: String, default: 'subscriber' },
     cart: { type: Array<string>, default: [] },
+    avatarImage: { type: String, default: '' },
     createdAt: { type: Date, default: Date.now },
     passwordResetToken: { type: String, default: '' },
     passwordResetExpires: { type: Number }

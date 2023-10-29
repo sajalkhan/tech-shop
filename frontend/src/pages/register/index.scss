@@ -1,9 +1,6 @@
 .p-register {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100dvh;
-  background-color: gray;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 2%);
 }

@@ -21,29 +21,36 @@ export class SignUp {
       throw new BadRequestError('Invalid credentials');
     }
 
-    const authObjectId: ObjectId = new ObjectId();
     const userObjectId: ObjectId = new ObjectId();
     const uId = `${Helpers.generateRandomIntegers(12)}`;
 
-    const authData: IUserDocument = this.signupData({
-      _id: authObjectId,
+    const userData: IUserDocument = this.signupData({
+      _id: userObjectId,
       uId,
       username,
       email,
       password
     });
 
-    const result: UploadApiResponse = (await uploads(avatarImage, 'techShop/profileImage', `${userObjectId}`)) as UploadApiResponse;
-    if (!result?.public_id) {
-      throw new BadRequestError('File upload: Error occurred. Try again.');
-    }
+    const result = await this.uploadAvatar(avatarImage, userObjectId);
+    userData.avatarImage = `https://res.cloudinary.com/${config.CLOUD_NAME}/image/upload/v${result.version}/techShop/profileImage/${userObjectId}`;
 
     // Add to database
-    await authService.createAuthUser(authData);
+    await authService.createAuthUser(userData);
 
-    const userJwt: string = this.signToken(authData, userObjectId);
+    const userJwt: string = this.signToken(userData, userObjectId);
     req.session = { jwt: userJwt };
-    res.status(HTTP_STATUS.CREATED).json({ message: 'User created successfully', authData, token: userJwt });
+    res.status(HTTP_STATUS.CREATED).json({ message: 'User created successfully', userData, token: userJwt });
+  }
+
+  private async uploadAvatar(avatarImage: string, userObjectId: ObjectId): Promise<UploadApiResponse> {
+    const result = await uploads(avatarImage, 'techShop/profileImage', `${userObjectId}`);
+
+    if (result && 'public_id' in result) {
+      return result as UploadApiResponse;
+    } else {
+      throw new BadRequestError('File upload: Error occurred. Try again.');
+    }
   }
 
   private signToken(data: IUserDocument, userObjectId: ObjectId): string {
@@ -65,6 +72,7 @@ export class SignUp {
       uId,
       username: Helpers.firstLetterUppercase(username),
       email: Helpers.lowerCase(email),
+      avatarImage: '',
       password,
       createdAt: new Date()
     } as unknown as IUserDocument;

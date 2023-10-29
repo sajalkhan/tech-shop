@@ -7,7 +7,7 @@
 }
 
 @mixin pc() {
-  @media (min-width: ($breakpoint-sp + 1)) {
+  @media (min-width: #{$breakpoint-tablet + 1}) {
     @content;
   }
 }
@@ -18,9 +18,16 @@
   }
 }
 
+// Media screen for tablets (768px - 1024px)
+@mixin tablet() {
+  @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-small-pc) {
+    @content;
+  }
+}
+
 //  Media screen 1025 and above
 @mixin wide-pc {
-  @media (min-width: ($breakpoint-small-pc + 1)) {
+  @media (min-width: #{$breakpoint-small-pc + 1}) {
     @content;
   }
 }
@@ -41,6 +48,7 @@
   background-position: 0% center;
   background-size: 200% 100%;
 }
+
 @mixin sprite-icon-active() {
   background-position: 100% center;
 }

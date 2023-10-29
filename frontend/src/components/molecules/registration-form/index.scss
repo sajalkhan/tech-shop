@@ -1,0 +1,38 @@
+.registration-form-wrapper {
+  padding: 1rem 2rem 1.5rem 2rem;
+  border-radius: 10px;
+  border: 1px solid $color-grey-1;
+  box-sizing: border-box;
+}
+
+.registration-text {
+  margin-bottom: 20px;
+  text-align: center;
+
+  h2 {
+    font-size: 25px;
+    font-weight: bold;
+    background: linear-gradient(to right, #f00, #00f);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+
+  p {
+    font-size: 16px;
+    color: $color-grey-1;
+  }
+}
+
+.btn-wrapper {
+  width: 50%;
+  margin-top: 1rem;
+  margin: 0 auto;
+
+  @include sp {
+    width: 50%;
+  }
+
+  &__submit {
+    width: 100%;
+  }
+}
