@@ -1,6 +1,8 @@
 import { message } from 'antd';
 import { useState } from 'react';
 import { User } from 'constants/types';
+import { ROUTES } from 'constants/routes';
+import { useNavigate } from 'react-router-dom';
 import { useRegisterUser } from 'services/useRegisterUser';
 import RegistrationForm from 'components/molecules/registration-form';
 
@@ -10,6 +12,7 @@ message.config({
 });
 
 const Register = () => {
+  const navigate = useNavigate();
   const { mutate } = useRegisterUser();
   const [response, setResponse] = useState(false);
 
@@ -20,6 +23,10 @@ const Register = () => {
       onSuccess: () => {
         setResponse(true);
         message.success('User register successfully!');
+
+        setTimeout(() => {
+          navigate(ROUTES.LOGIN);
+        }, 2500);
       },
       onError: (err: any) => {
         message.error(err.message);

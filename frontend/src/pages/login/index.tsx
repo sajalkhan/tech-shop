@@ -1,6 +1,8 @@
 import { message } from 'antd';
 import { useState } from 'react';
 import { User } from 'constants/types';
+import { ROUTES } from 'constants/routes';
+import { useNavigate } from 'react-router-dom';
 import { useLoginUser } from 'services/useLoginUser';
 import LoginForm from 'components/molecules/login-form';
 
@@ -10,6 +12,7 @@ message.config({
 });
 
 const Login = () => {
+  const navigate = useNavigate();
   const { mutate } = useLoginUser();
   const [response, setResponse] = useState(false);
 
@@ -20,6 +23,10 @@ const Login = () => {
       onSuccess: () => {
         setResponse(true);
         message.success('User Login successfully!');
+
+        setTimeout(() => {
+          navigate(ROUTES.HOME);
+        }, 2500);
       },
       onError: (err: any) => {
         message.error(err.message);
