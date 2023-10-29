@@ -2,12 +2,14 @@ import React from 'react';
 import { Menu } from 'antd';
 import { NavigationItems } from 'constants/nav-menu';
 import { useSelectedTab } from 'hooks/useSelectedTab';
+// import { useUser } from 'context/userContext';
 
 type NavigationProps = {
   onClick?: (e: { key: React.Key }) => void;
 };
 
 const Navigation: React.FC<NavigationProps> = ({ onClick }) => {
+  // const { user } = useUser();
   const [currentTab, setCurrentTab] = useSelectedTab('/');
 
   const handleTab = (e: { key: React.Key }) => {

@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Rule } from 'antd/es/form';
 import { UploadOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Upload, UploadFile, message } from 'antd';
 import { nameRules, emailRules, passwordRules, confirmRules } from './validation-rules';
 
 type RegisterFrom = {
+  isGetResponse: boolean;
   onSubmit: (value: any) => void;
 };
 
-const RegistrationForm = ({ onSubmit }: RegisterFrom) => {
+const RegistrationForm = ({ onSubmit, isGetResponse }: RegisterFrom) => {
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  useEffect(() => {
+    if (isGetResponse) {
+      form.resetFields();
+      setFileList([]);
+    }
+  }, [form, isGetResponse]);
 
   const beforeUpload = (file: any) => {
     if (file.size > 400 * 1024) {
@@ -31,8 +39,6 @@ const RegistrationForm = ({ onSubmit }: RegisterFrom) => {
     delete value.confirm;
     const avatarImage = fileList[0]?.thumbUrl || '';
     onSubmit({ avatarImage, ...value });
-    form.resetFields();
-    setFileList([]);
   };
 
   return (

@@ -1,17 +1,22 @@
+import { useEffect } from 'react';
 import { Rule } from 'antd/es/form';
 import { Form, Input, Button } from 'antd';
 import { emailRules, passwordRules } from './validation-rules';
 
 type LoginForm = {
+  isGetResponse: boolean;
   onSubmit: (value: any) => void;
 };
 
-const LoginForm = ({ onSubmit }: LoginForm) => {
+const LoginForm = ({ onSubmit, isGetResponse }: LoginForm) => {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    isGetResponse && form.resetFields();
+  }, [form, isGetResponse]);
 
   const onFinish = (value: any) => {
     onSubmit(value);
-    form.resetFields();
   };
 
   return (

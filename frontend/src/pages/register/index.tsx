@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { message } from 'antd';
-import { useCallback } from 'react';
+import { useState } from 'react';
 import { User } from 'constants/types';
 import { useRegisterUser } from 'services/useRegisterUser';
 import RegistrationForm from 'components/molecules/registration-form';
@@ -12,21 +11,25 @@ message.config({
 
 const Register = () => {
   const { mutate } = useRegisterUser();
+  const [response, setResponse] = useState(false);
 
-  const handleSubmit = useCallback(async (userData: User) => {
+  const handleSubmit = async (userData: User) => {
+    setResponse(false);
+
     await mutate(userData, {
       onSuccess: () => {
+        setResponse(true);
         message.success('User register successfully!');
       },
       onError: (err: any) => {
         message.error(err.message);
       },
     });
-  }, []);
+  };
 
   return (
     <div className="p-register">
-      <RegistrationForm onSubmit={handleSubmit} />
+      <RegistrationForm onSubmit={handleSubmit} isGetResponse={response} />
     </div>
   );
 };
