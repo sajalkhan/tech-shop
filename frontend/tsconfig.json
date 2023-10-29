@@ -22,9 +22,10 @@
     "noImplicitAny": true,
     "paths": {
       "@root/*": ["./*"],
-      "libs": ["./src/libs/*"],
       "pages": ["./src/pages/*"],
       "assets": ["./src/assets/*"],
+      "hooks": ["src/hooks/*"],
+      "services": ["src/services/*"],
       "constants": ["./src/constants/*"],
       "components": ["./src/components/*"],
     }

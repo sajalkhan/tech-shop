@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { NavigationItems } from '@root/libs/nav-menu';
-import { useSelectedTab } from '@root/libs/Hooks/useSelectedTab';
+import { NavigationItems } from 'constants/nav-menu';
+import { useSelectedTab } from 'hooks/useSelectedTab';
 
 type NavigationProps = {
   onClick?: (e: { key: React.Key }) => void;

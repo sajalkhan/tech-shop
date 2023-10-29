@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { message } from 'antd';
 import { useCallback } from 'react';
-import { useRegisterUser } from '@root/services/useRegisterUser';
+import { User } from 'constants/types';
+import { useRegisterUser } from 'services/useRegisterUser';
 import RegistrationForm from 'components/molecules/registration-form';
-import { User } from '@root/constants/types';
 
 message.config({
   top: 10,
