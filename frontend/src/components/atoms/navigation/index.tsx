@@ -26,4 +26,4 @@ const Navigation: React.FC<NavigationProps> = ({ onClick }) => {
   );
 };
 
-export default Navigation;
+export default React.memo(Navigation);

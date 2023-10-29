@@ -36,7 +36,7 @@ const RegistrationForm = ({ onSubmit }: RegisterFrom) => {
   };
 
   return (
-    <div className="registration-form-wrapper">
+    <div className="registrationForm-wrapper">
       <div className="registration-text">
         <h2>Register Now</h2>
         <p>Enhance your tech adventure with our premium accessories</p>
@@ -56,7 +56,7 @@ const RegistrationForm = ({ onSubmit }: RegisterFrom) => {
         </Form.Item>
 
         <Form.Item label="confirm" name="confirm" rules={confirmRules}>
-          <Input.Password placeholder="Please confirm password" />
+          <Input.Password placeholder="Please enter confirm password" />
         </Form.Item>
 
         <Form.Item>
@@ -88,8 +88,8 @@ const RegistrationForm = ({ onSubmit }: RegisterFrom) => {
           </Upload.Dragger>
         </Form.Item>
 
-        <div className="btn-wrapper">
-          <Button type="primary" htmlType="submit" size="large" className="btn-wrapper__submit">
+        <div className="regBtn-wrapper">
+          <Button type="primary" htmlType="submit" size="large" className="regBtn-wrapper__submit">
             Submit
           </Button>
         </div>

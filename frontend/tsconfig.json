@@ -24,6 +24,7 @@
       "@root/*": ["./*"],
       "pages": ["./src/pages/*"],
       "assets": ["./src/assets/*"],
+      "utils": ["./src/utils/*"],
       "hooks": ["src/hooks/*"],
       "services": ["src/services/*"],
       "constants": ["./src/constants/*"],

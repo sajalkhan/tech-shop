@@ -1,17 +1,16 @@
 import axios from 'utils/axiosConfig';
 import { useMutation } from 'react-query';
-import { User } from '@root/constants/types';
 import axiosErrorHandler from 'utils/axiosErrorHandler';
 
-const registerUser = async (userData: User) => {
+const loginUser = async (userInfo: any) => {
   try {
-    const response = await axios.post('/signup', userData);
+    const response = await axios.post('/signin', userInfo);
     return response.data;
   } catch (error: any) {
     return axiosErrorHandler(error);
   }
 };
 
-export const useRegisterUser = () => {
-  return useMutation(registerUser);
+export const useLoginUser = () => {
+  return useMutation(loginUser);
 };

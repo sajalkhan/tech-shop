@@ -2,21 +2,21 @@
 import { message } from 'antd';
 import { useCallback } from 'react';
 import { User } from 'constants/types';
-import { useRegisterUser } from 'services/useRegisterUser';
-import RegistrationForm from 'components/molecules/registration-form';
+import { useLoginUser } from 'services/useLoginUser';
+import LoginForm from 'components/molecules/login-form';
 
 message.config({
   top: 10,
   duration: 2,
 });
 
-const Register = () => {
-  const { mutate } = useRegisterUser();
+const Login = () => {
+  const { mutate } = useLoginUser();
 
   const handleSubmit = useCallback(async (userData: User) => {
     await mutate(userData, {
       onSuccess: () => {
-        message.success('User register successfully!');
+        message.success('User Login successfully!');
       },
       onError: (err: any) => {
         message.error(err.message);
@@ -25,10 +25,10 @@ const Register = () => {
   }, []);
 
   return (
-    <div className="p-register">
-      <RegistrationForm onSubmit={handleSubmit} />
+    <div className="p-login">
+      <LoginForm onSubmit={handleSubmit} />
     </div>
   );
 };
 
-export default Register;
+export default Login;

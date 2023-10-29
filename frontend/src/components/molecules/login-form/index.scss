@@ -1,11 +1,11 @@
-.registrationForm-wrapper {
-  padding: 2rem;
+.loginForm-wrapper {
+  padding: 6rem 8rem 2rem;
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-.registration-text {
+.login-text {
   margin-bottom: 20px;
   text-align: center;
 
@@ -16,26 +16,23 @@
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
   }
-
-  p {
-    font-size: 16px;
-    color: $color-grey-1;
-
-    @include sp {
-      font-size: 10px;
-    }
-  }
 }
 
-.regBtn-wrapper {
-  width: 50%;
+.loginBtn-wrapper {
+  padding-top: 3rem;
   margin: 0 auto;
-
-  @include sp {
-    width: 200px;
-  }
 
   &__submit {
     width: 100%;
+  }
+}
+
+.forgot-password {
+  margin-top: 1rem;
+  text-align: center;
+  color: $color-grey-1;
+
+  &__text {
+    font-size: 1.5rem;
   }
 }

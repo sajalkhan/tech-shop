@@ -19,7 +19,7 @@ class AuthRoutes {
     const password = new Password();
 
     this.router.post('/signup', (req, res) => signUp.create(req, res));
-    this.router.get('/signin', (req, res) => signIn.read(req, res));
+    this.router.post('/signin', (req, res) => signIn.read(req, res));
     this.router.get('/signout', (req, res) => signOut.update(req, res));
     this.router.post('/forgot-password', (req, res) => password.create(req, res));
     this.router.post('/reset-password/:token', (req, res) => password.update(req, res));

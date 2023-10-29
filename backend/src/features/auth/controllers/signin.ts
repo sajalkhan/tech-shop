@@ -11,8 +11,8 @@ import { joiValidation } from '@global/decorators/joi-validation-decorator';
 export class SignIn {
   @joiValidation(loginSchema)
   public async read(req: Request, res: Response): Promise<void> {
-    const { username, password } = req.body;
-    const existingUser: IUserDocument = await authService.getAuthUserByUsername(username);
+    const { email, password } = req.body;
+    const existingUser: IUserDocument = await authService.getAuthUserByEmail(email);
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
     }
