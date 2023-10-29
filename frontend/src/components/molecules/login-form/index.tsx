@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Rule } from 'antd/es/form';
 import { Form, Input, Button } from 'antd';
-import { emailRules, passwordRules } from './validation-rules';
+import { emailRules, passwordRules } from 'constants/form-validation-rules';
 
 type LoginForm = {
   isGetResponse: boolean;
