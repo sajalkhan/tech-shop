@@ -1,11 +1,11 @@
 import axios from 'utils/axiosConfig';
 import { useMutation } from 'react-query';
+import { SignInUser } from 'constants/types';
 import axiosErrorHandler from 'utils/axiosErrorHandler';
 
-const loginUser = async (userInfo: any) => {
+const loginUser = async (userInfo: SignInUser) => {
   try {
     const { data } = await axios.post('/signin', userInfo);
-    localStorage.setItem('token', data.token);
     return data;
   } catch (error: any) {
     return axiosErrorHandler(error);
@@ -13,5 +13,13 @@ const loginUser = async (userInfo: any) => {
 };
 
 export const useLoginUser = () => {
-  return useMutation(loginUser);
+  return useMutation(async (userInfo: SignInUser) => await loginUser(userInfo), {
+    onSuccess: async data => {
+      localStorage.setItem('token', data.token);
+      return data;
+    },
+    onError: async (err: Error) => {
+      return err;
+    },
+  });
 };

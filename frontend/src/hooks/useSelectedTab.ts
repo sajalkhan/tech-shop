@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-// Custom hook to manage the selected tab and persist it in localStorage
 export const useSelectedTab = (defaultTab = '/') => {
+  const location = useLocation();
   const [selectedTab, setSelectedTab] = useState<string>(defaultTab);
 
   const handleTabChange = useCallback((newTab: string) => {
@@ -9,11 +10,8 @@ export const useSelectedTab = (defaultTab = '/') => {
   }, []);
 
   useEffect(() => {
-    const routeName = window.location.pathname.split('/')[1];
-    if (routeName) {
-      setSelectedTab(routeName);
-    }
-  }, []);
+    setSelectedTab(location.pathname);
+  }, [location.pathname]);
 
   return [selectedTab, handleTabChange];
 };

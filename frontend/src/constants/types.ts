@@ -4,3 +4,8 @@ export type User = {
   password: string;
   avatarImage: string;
 };
+
+export type SignInUser = {
+  name: string;
+  email: string;
+};
