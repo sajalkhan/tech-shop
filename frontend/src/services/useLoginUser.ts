@@ -15,7 +15,7 @@ const loginUser = async (userInfo: SignInUser) => {
 export const useLoginUser = () => {
   return useMutation(async (userInfo: SignInUser) => await loginUser(userInfo), {
     onSuccess: async data => {
-      localStorage.setItem('token', data.token);
+      // localStorage.setItem('token', data.token);
       return data;
     },
     onError: async (err: Error) => {

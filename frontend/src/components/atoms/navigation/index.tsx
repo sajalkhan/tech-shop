@@ -6,19 +6,22 @@ import { useUserStore } from 'store/useUserStore';
 
 type NavigationProps = {
   onClick?: (e: { key: React.Key }) => void;
+  logout?: () => void;
 };
 
-const Navigation: React.FC<NavigationProps> = ({ onClick }) => {
+const Navigation: React.FC<NavigationProps> = ({ onClick, logout }) => {
   const { user } = useUserStore();
   const [currentTab, setCurrentTab] = useSelectedTab('/');
 
   const handleTab = (e: { key: React.Key }) => {
     (setCurrentTab as (newTab: string) => void)(e.key as string);
+
+    if (e.key === 'logout') logout && logout();
     onClick && onClick(e);
   };
 
   const updatedNavigationItems = NavigationItems?.map((item: any) => {
-    if (item.key === 'username' && user.username !== '') {
+    if (item.key === '/userinfo' && user.username !== '') {
       return {
         ...item,
         label: `Welcome, ${user.username}`,
@@ -26,6 +29,10 @@ const Navigation: React.FC<NavigationProps> = ({ onClick }) => {
       };
     }
     return item;
+  }).filter((item: any) => {
+    if (!user.isLogin && item.key === '/userinfo') return false;
+    if (user.username !== '' && (item.key === '/login' || item.key === '/register')) return false;
+    return true;
   });
 
   return (

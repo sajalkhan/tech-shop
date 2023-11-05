@@ -7,15 +7,11 @@ class CurrentUserRoutes {
 
   constructor() {
     this.router = express.Router();
-    this.routes();
   }
 
-  private routes(): void {
-    const currentUser = new CurrentUser();
-    this.router.get('/currentUser', authMiddleware.checkAuthentication, (req, res) => currentUser.read(req, res));
-  }
+  public routes(): Router {
+    this.router.get('/currentUser', authMiddleware.checkAuthentication, CurrentUser.prototype.read);
 
-  public getRouter(): Router {
     return this.router;
   }
 }

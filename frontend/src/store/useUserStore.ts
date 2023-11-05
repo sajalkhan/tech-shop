@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 type User = {
+  token?: string;
   email: string;
   isLogin: boolean;
   username: string;
