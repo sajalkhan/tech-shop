@@ -1,6 +1,6 @@
-import axios from 'utils/axiosConfig';
+import axios from '@/utils/axiosConfig';
 import { useMutation } from 'react-query';
-import axiosErrorHandler from 'utils/axiosErrorHandler';
+import axiosErrorHandler from '@/utils/axiosErrorHandler';
 
 const logoutUser = async () => {
   try {

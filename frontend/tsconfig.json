@@ -16,20 +16,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "downlevelIteration": true,
     "sourceMap": true,
     "noImplicitAny": true,
     "paths": {
-      "@root/*": ["./*"],
-      "pages": ["./src/pages/*"],
-      "assets": ["./src/assets/*"],
-      "utils": ["./src/utils/*"],
-      "hooks": ["src/hooks/*"],
-      "store": ["src/store/*"],
-      "services": ["src/services/*"],
-      "constants": ["./src/constants/*"],
-      "components": ["./src/components/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", "config-overrides.js"],

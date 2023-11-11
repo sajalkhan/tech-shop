@@ -1,12 +1,12 @@
 import { message } from 'antd';
 import { useState } from 'react';
-import { User } from 'constants/types';
-import { ROUTES } from 'constants/routes';
+import { User } from '@/constant/types';
+import { ROUTES } from '@/routes/constant';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from 'store/useUserStore';
-import { useLoginUser } from 'services/useLoginUser';
-import useLocalStorage from 'hooks/useLocalStorage';
-import LoginForm from 'components/molecules/login-form';
+import { useUserStore } from '@/store/useUserStore';
+import useLocalStorage from '@/hooks/useLocalStorage';
+import { useLoginUser } from '@/services/useLoginUser';
+import LoginForm from '@/components/molecules/login-form';
 
 message.config({
   top: 50,
@@ -25,11 +25,11 @@ const Login = () => {
 
     loginUser(userData, {
       onSuccess: (data: any) => {
-        addUser(data.user);
         setResponse(true);
         setValue(data.token);
+        addUser({ ...data.user, token: data.token });
         message.success('User Login successfully!');
-        setTimeout(() => navigate(ROUTES.HOME), 2500);
+        setTimeout(() => navigate(ROUTES.USER), 2500);
       },
       onError: (err: Error) => {
         message.error(err.message);

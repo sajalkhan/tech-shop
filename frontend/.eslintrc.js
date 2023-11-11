@@ -79,7 +79,7 @@ module.exports = {
         // Disable ESLint default rules
         'no-use-before-define': 0,
         // Import plugin rules
-        'import/no-relative-parent-imports': 2,
+        'import/no-relative-parent-imports': 0,
         // TypeScript rules
         '@typescript-eslint/no-use-before-define': 2,
         '@typescript-eslint/no-explicit-any': 0,

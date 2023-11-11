@@ -1,7 +1,7 @@
-import axios from 'utils/axiosConfig';
+import axios from '@/utils/axiosConfig';
 import { useMutation } from 'react-query';
-import { SignInUser } from 'constants/types';
-import axiosErrorHandler from 'utils/axiosErrorHandler';
+import { SignInUser } from '@/constant/types';
+import axiosErrorHandler from '@/utils/axiosErrorHandler';
 
 const loginUser = async (userInfo: SignInUser) => {
   try {

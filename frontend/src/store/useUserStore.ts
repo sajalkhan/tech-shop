@@ -13,7 +13,8 @@ type UserStore = {
 };
 
 export const useUserStore = create<UserStore>(set => ({
-  user: { username: '', email: '', isLogin: false },
-  removeUser: () => set({ user: { username: '', email: '', isLogin: false } }),
-  addUser: (user: User) => set({ user: { username: user.username, email: user.email, isLogin: true } }),
+  user: { username: '', email: '', token: '', isLogin: false },
+  removeUser: () => set({ user: { username: '', email: '', token: '', isLogin: false } }),
+  addUser: (user: User) =>
+    set({ user: { username: user.username, email: user.email, token: user.token, isLogin: true } }),
 }));

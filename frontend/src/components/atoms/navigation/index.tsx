@@ -1,8 +1,8 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { NavigationItems } from 'constants/nav-menu';
-import { useSelectedTab } from 'hooks/useSelectedTab';
-import { useUserStore } from 'store/useUserStore';
+import { NavigationItems } from '@/constant/nav-menu';
+import { useSelectedTab } from '@/hooks/useSelectedTab';
+import { useUserStore } from '@/store/useUserStore';
 
 type NavigationProps = {
   onClick?: (e: { key: React.Key }) => void;

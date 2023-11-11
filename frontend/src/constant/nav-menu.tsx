@@ -7,6 +7,9 @@ import {
   ShoppingOutlined,
   ShoppingCartOutlined,
   LogoutOutlined,
+  HistoryOutlined,
+  EditOutlined,
+  HeartOutlined,
 } from '@ant-design/icons';
 
 export const NavigationItems: MenuProps['items'] = [
@@ -53,5 +56,23 @@ export const NavigationItems: MenuProps['items'] = [
         icon: <LogoutOutlined rev={undefined} />,
       },
     ],
+  },
+];
+
+export const UserNavigationItems: MenuProps['items'] = [
+  {
+    label: 'History',
+    key: '/user/history',
+    icon: <HistoryOutlined rev={undefined} />,
+  },
+  {
+    label: 'Update Password',
+    key: '/user/password',
+    icon: <EditOutlined rev={undefined} />,
+  },
+  {
+    label: 'WishList',
+    key: '/user/wishlist',
+    icon: <HeartOutlined rev={undefined} />,
   },
 ];

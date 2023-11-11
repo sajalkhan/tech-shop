@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
 import { Rule } from 'antd/es/form';
+import { useState, useEffect } from 'react';
 import { UploadOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Upload, UploadFile, message } from 'antd';
-import { nameRules, emailRules, passwordRules, confirmRules } from 'constants/form-validation-rules';
+import { nameRules, emailRules, passwordRules, confirmRules } from '../../../constant/validationRules';
 
 type RegisterFrom = {
   isGetResponse: boolean;

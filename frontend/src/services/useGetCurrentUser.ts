@@ -1,6 +1,6 @@
-import axios from 'utils/axiosConfig';
 import { useQuery } from 'react-query';
-import axiosErrorHandler from 'utils/axiosErrorHandler';
+import axios from '@/utils/axiosConfig';
+import axiosErrorHandler from '@/utils/axiosErrorHandler';
 
 const getCurrentUser = async () => {
   try {

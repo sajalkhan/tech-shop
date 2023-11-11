@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback } from 'react';
 import { message } from 'antd';
-import PagesRoutes from 'pages/routes';
-import { ROUTES } from 'constants/routes';
+import { AppRouter } from '@/routes';
+import { ROUTES } from '@/routes/constant';
 import { useNavigate } from 'react-router-dom';
-import Navigation from 'components/atoms/navigation';
-import { useUserStore } from '@root/store/useUserStore';
-import { useLogoutUser } from '@root/services/useLogoutUser';
-import { useGetCurrentUserInfo } from 'services/useGetCurrentUser';
+import { useUserStore } from '@/store/useUserStore';
+import Navigation from '@/components/atoms/navigation';
+import { useLogoutUser } from '@/services/useLogoutUser';
+import { useGetCurrentUserInfo } from '@/services/useGetCurrentUser';
 
-import useLocalStorage from 'hooks/useLocalStorage';
+import useLocalStorage from '@/hooks/useLocalStorage';
 
 const App: React.FC = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (!userDetails?.isUser && token) refetchUserInfo();
-    if (userDetails?.isUser) addUser(userDetails?.user);
+    if (userDetails?.isUser) addUser({ ...userDetails?.user, token: userDetails?.token });
   }, [userDetails]);
 
   const handleLogout = () => {
@@ -40,7 +40,7 @@ const App: React.FC = () => {
   return (
     <>
       <Navigation onClick={handleRoute} logout={handleLogout} />
-      <PagesRoutes />
+      <AppRouter />
     </>
   );
 };
