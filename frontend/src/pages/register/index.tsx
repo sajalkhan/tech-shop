@@ -1,20 +1,16 @@
-import { message } from 'antd';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { User } from '@/constant/types';
 import { ROUTES } from '@/routes/constant';
 import { useNavigate } from 'react-router-dom';
 import { useRegisterUser } from '@/services/useRegisterUser';
 import RegistrationForm from '@/components/molecules/registration-form';
 
-message.config({
-  top: 10,
-  duration: 2,
-});
-
 const Register = () => {
   const navigate = useNavigate();
   const { mutate } = useRegisterUser();
   const [response, setResponse] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (userData: User) => {
     setResponse(false);
@@ -22,21 +18,26 @@ const Register = () => {
     await mutate(userData, {
       onSuccess: () => {
         setResponse(true);
-        message.success('User register successfully!');
+        toast.success('User register successfully!');
 
         setTimeout(() => {
           navigate(ROUTES.LOGIN);
         }, 2500);
       },
       onError: (err: any) => {
-        message.error(err.message);
+        toast.error(err.message);
       },
     });
   };
 
   return (
     <div className="p-register">
-      <RegistrationForm onSubmit={handleSubmit} isGetResponse={response} />
+      <RegistrationForm
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        onSubmit={handleSubmit}
+        isGetResponse={response}
+      />
     </div>
   );
 };

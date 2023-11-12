@@ -15,7 +15,7 @@ const userSchema: Schema = new Schema(
     avatarImage: { type: String, default: '' },
     createdAt: { type: Date, default: Date.now },
     passwordResetToken: { type: String, default: '' },
-    passwordResetExpires: { type: Number }
+    passwordResetExpires: { type: Date }
   },
   {
     toJSON: {
@@ -27,15 +27,20 @@ const userSchema: Schema = new Schema(
   }
 );
 
-userSchema.pre('save', async function (this: IUserDocument, next: () => void) {
-  const hashedPassword: string = await hash(this.password as string, SALT_ROUND);
-  this.password = hashedPassword;
-  next();
+// Middleware to hash the password before saving
+userSchema.pre('save', async function (this: IUserDocument, next) {
+  try {
+    const hashedPassword: string = await hash(this.password as string, SALT_ROUND);
+    this.password = hashedPassword;
+    next();
+  } catch (error) {
+    next(error as Error);
+  }
 });
 
 userSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
   const hashedPassword: string = (this as unknown as IUserDocument).password!;
-  return compare(password, hashedPassword);
+  return await compare(password, hashedPassword);
 };
 
 userSchema.methods.hashPassword = async function (password: string): Promise<string> {

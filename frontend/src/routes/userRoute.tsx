@@ -1,8 +1,7 @@
-import { RouteProps } from 'react-router-dom';
 import { useUserStore } from '@/store/useUserStore';
 import { LoadingToRedirect } from '@/components/atoms/loadingToRedirect';
 
-interface UserRouteProps extends RouteProps {
+interface UserRouteProps {
   children: React.ReactNode;
 }
 

@@ -6,13 +6,13 @@ import { Request, Response } from 'express';
 
 import { config } from '@root/config';
 import { authService } from '@service/db/auth.service';
+import { mailTransport } from '@service/emails/mail.transport';
 import { BadRequestError } from '@global/helpers/error-handler';
 import { IUserDocument } from '@auth/interfaces/user.interface';
 import { joiValidation } from '@global/decorators/joi-validation-decorator';
 import { forgotPasswordTemplate } from '@service/emails/templates/forgot-password';
 import { resetPasswordTemplate } from '@service/emails/templates/reset-password';
-import { emailSchema, passwordSchema } from '@auth/validation-schema/password';
-import { mailTransport } from '@service/emails/mail.transport';
+import { emailSchema, passwordSchema, updatePasswordSchema } from '@auth/validation-schema/password';
 
 export class Password {
   @joiValidation(emailSchema)
@@ -34,7 +34,7 @@ export class Password {
   }
 
   @joiValidation(passwordSchema)
-  public async update(req: Request, res: Response): Promise<void> {
+  public async reset(req: Request, res: Response): Promise<void> {
     const { password, confirmPassword } = req.body;
     const { token } = req.params;
     if (password !== confirmPassword) {
@@ -59,6 +59,23 @@ export class Password {
 
     const template: string = resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
     await mailTransport.sendEmail(existingUser.email, 'Password Reset Confirmation', template);
+
+    res.status(HTTP_STATUS.OK).json({ message: 'Password successfully updated.' });
+  }
+
+  @joiValidation(updatePasswordSchema)
+  public async updatePassword(req: Request, res: Response): Promise<void> {
+    const { email, password, confirmPassword } = req.body;
+
+    const existingUser: IUserDocument = await authService.getAuthUserByEmail(email);
+    if (!existingUser) throw new BadRequestError('Invalid credentials');
+    if (password === confirmPassword) throw new BadRequestError('Password must be different!');
+
+    const passwordsMatch: boolean = await existingUser.comparePassword(password);
+    if (!passwordsMatch) throw new BadRequestError('Password Does not match.');
+
+    existingUser.password = confirmPassword;
+    await existingUser.save();
 
     res.status(HTTP_STATUS.OK).json({ message: 'Password successfully updated.' });
   }

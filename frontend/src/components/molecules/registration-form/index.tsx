@@ -5,11 +5,13 @@ import { Form, Input, Button, Upload, UploadFile, message } from 'antd';
 import { nameRules, emailRules, passwordRules, confirmRules } from '../../../constant/validationRules';
 
 type RegisterFrom = {
+  isLoading: boolean;
   isGetResponse: boolean;
   onSubmit: (value: any) => void;
+  setIsLoading: (value: boolean) => void;
 };
 
-const RegistrationForm = ({ onSubmit, isGetResponse }: RegisterFrom) => {
+const RegistrationForm = ({ onSubmit, isGetResponse, setIsLoading, isLoading }: RegisterFrom) => {
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
@@ -39,6 +41,7 @@ const RegistrationForm = ({ onSubmit, isGetResponse }: RegisterFrom) => {
     delete value.confirm;
     const avatarImage = fileList[0]?.thumbUrl || '';
     onSubmit({ avatarImage, ...value });
+    setIsLoading(true);
   };
 
   return (
@@ -95,7 +98,7 @@ const RegistrationForm = ({ onSubmit, isGetResponse }: RegisterFrom) => {
         </Form.Item>
 
         <div className="regBtn-wrapper">
-          <Button type="primary" htmlType="submit" size="large" className="regBtn-wrapper__submit">
+          <Button type="primary" htmlType="submit" size="large" loading={isLoading} className="regBtn-wrapper__submit">
             Submit
           </Button>
         </div>

@@ -22,7 +22,8 @@ class AuthRoutes {
     this.router.post('/signin', (req, res) => signIn.read(req, res));
     this.router.get('/signout', (req, res) => signOut.update(req, res));
     this.router.post('/forgot-password', (req, res) => password.create(req, res));
-    this.router.post('/reset-password/:token', (req, res) => password.update(req, res));
+    this.router.post('/reset-password/:token', (req, res) => password.reset(req, res));
+    this.router.post('/update-password', (req, res) => password.updatePassword(req, res));
   }
 
   public getRouter(): Router {

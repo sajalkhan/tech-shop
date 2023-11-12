@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback } from 'react';
-import { message } from 'antd';
 import { AppRouter } from '@/routes';
 import { ROUTES } from '@/routes/constant';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { useUserStore } from '@/store/useUserStore';
 import Navigation from '@/components/atoms/navigation';
 import { useLogoutUser } from '@/services/useLogoutUser';
 import { useGetCurrentUserInfo } from '@/services/useGetCurrentUser';
+import toast, { Toaster } from 'react-hot-toast';
 
 import useLocalStorage from '@/hooks/useLocalStorage';
 
@@ -32,13 +32,14 @@ const App: React.FC = () => {
         removeUser();
         deleteToken();
         navigate(ROUTES.LOGIN);
-        message.success('User Logout successfully!');
+        toast.success('User Logout successfully!');
       },
     });
   };
 
   return (
     <>
+      <Toaster position="top-right" reverseOrder={false} toastOptions={{ style: { marginTop: '40px' } }} />
       <Navigation onClick={handleRoute} logout={handleLogout} />
       <AppRouter />
     </>

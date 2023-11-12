@@ -80,6 +80,7 @@ module.exports = {
         'no-use-before-define': 0,
         // Import plugin rules
         'import/no-relative-parent-imports': 0,
+        'import/no-extraneous-dependencies': 0,
         // TypeScript rules
         '@typescript-eslint/no-use-before-define': 2,
         '@typescript-eslint/no-explicit-any': 0,

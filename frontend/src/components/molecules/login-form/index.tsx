@@ -1,22 +1,27 @@
-import { useEffect } from 'react';
 import { Rule } from 'antd/es/form';
+import { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 import { emailRules, passwordRules } from '../../../constant/validationRules';
 
 type LoginForm = {
+  isLoading: boolean;
   isGetResponse: boolean;
   onSubmit: (value: any) => void;
+  setIsLoading: (value: boolean) => void;
 };
 
-const LoginForm = ({ onSubmit, isGetResponse }: LoginForm) => {
+const LoginForm = ({ onSubmit, isGetResponse, isLoading, setIsLoading }: LoginForm) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    isGetResponse && form.resetFields();
+    if (isGetResponse) {
+      form.resetFields();
+    }
   }, [form, isGetResponse]);
 
   const onFinish = (value: any) => {
     onSubmit(value);
+    setIsLoading(true);
   };
 
   return (
@@ -35,7 +40,13 @@ const LoginForm = ({ onSubmit, isGetResponse }: LoginForm) => {
         </Form.Item>
 
         <div className="loginBtn-wrapper">
-          <Button type="primary" htmlType="submit" size="large" className="loginBtn-wrapper__submit">
+          <Button
+            size="large"
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+            className="loginBtn-wrapper__submit"
+          >
             Submit
           </Button>
         </div>
