@@ -1,6 +1,5 @@
 import type { MenuProps } from 'antd';
 import {
-  AppstoreOutlined,
   SettingOutlined,
   UserOutlined,
   UserAddOutlined,
@@ -10,13 +9,14 @@ import {
   HistoryOutlined,
   EditOutlined,
   HeartOutlined,
+  HomeOutlined,
 } from '@ant-design/icons';
 
 export const NavigationItems: MenuProps['items'] = [
   {
     label: 'Home',
     key: '/',
-    icon: <AppstoreOutlined rev={undefined} />,
+    icon: <HomeOutlined rev={undefined} />,
   },
   {
     label: 'Shop',
