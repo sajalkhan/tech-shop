@@ -14,6 +14,6 @@ export default {
   },
 } as ComponentMeta<typeof LoginForm>;
 
-const Template: ComponentStory<typeof LoginForm> = args => <LoginForm {...args} onSubmit={args.onSubmit} />;
+const Template: ComponentStory<typeof LoginForm> = (args: any) => <LoginForm {...args} onSubmit={args.onSubmit} />;
 
 export const Normal = Template.bind({});

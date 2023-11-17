@@ -14,7 +14,7 @@ export default {
   },
 } as ComponentMeta<typeof UpdatePasswordForm>;
 
-const Template: ComponentStory<typeof UpdatePasswordForm> = args => (
+const Template: ComponentStory<typeof UpdatePasswordForm> = (args: any) => (
   <UpdatePasswordForm {...args} onSubmit={args.onSubmit} />
 );
 

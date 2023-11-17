@@ -14,7 +14,7 @@ export default {
   },
 } as ComponentMeta<typeof RegistrationForm>;
 
-const Template: ComponentStory<typeof RegistrationForm> = args => (
+const Template: ComponentStory<typeof RegistrationForm> = (args: any) => (
   <RegistrationForm {...args} onSubmit={args.onSubmit} />
 );
 

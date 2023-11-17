@@ -14,7 +14,7 @@ export default {
   },
 } as ComponentMeta<typeof UserNavigation>;
 
-const Template: ComponentStory<typeof UserNavigation> = args => <UserNavigation {...args} />;
+const Template: ComponentStory<typeof UserNavigation> = (args: any) => <UserNavigation {...args} />;
 
 export const Normal = Template.bind({});
 Normal.args = {
