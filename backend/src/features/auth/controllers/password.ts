@@ -27,7 +27,7 @@ export class Password {
     const randomCharacters: string = randomBytes.toString('hex');
     await authService.updatePasswordToken(`${existingUser._id!}`, randomCharacters, Date.now() * 60 * 60 * 1000);
 
-    const resetLink = `${config.CLIENT_URL}/reset-password?token=${randomCharacters}`;
+    const resetLink = `${config.CLIENT_URL}/reset-password/${randomCharacters}`;
     const template: string = forgotPasswordTemplate.passwordResetTemplate(existingUser.username!, resetLink);
     await mailTransport.sendEmail(email, 'Reset your password', template);
     res.status(HTTP_STATUS.OK).json({ message: 'Password reset email sent.' });

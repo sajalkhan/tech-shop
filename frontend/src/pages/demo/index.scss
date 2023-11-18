@@ -1,0 +1,13 @@
+.demo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+
+  hr {
+    margin: 10px 0;
+    color: black;
+    width: 100%;
+  }
+}

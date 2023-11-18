@@ -1,6 +1,7 @@
 import { Rule } from 'antd/es/form';
 import { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import { emailRules, passwordRules } from '../../../constant/validationRules';
 
 type LoginForm = {
@@ -11,6 +12,7 @@ type LoginForm = {
 };
 
 const LoginForm = ({ onSubmit, isGetResponse, isLoading, setIsLoading }: LoginForm) => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -22,6 +24,10 @@ const LoginForm = ({ onSubmit, isGetResponse, isLoading, setIsLoading }: LoginFo
   const onFinish = (value: any) => {
     onSubmit(value);
     setIsLoading(true);
+  };
+
+  const handleForgotPasswordClick = () => {
+    navigate('/forgotPassword');
   };
 
   return (
@@ -52,7 +58,7 @@ const LoginForm = ({ onSubmit, isGetResponse, isLoading, setIsLoading }: LoginFo
         </div>
 
         <Form.Item className="forgot-password">
-          <a href="/forgot-password" className="forgot-password__text">
+          <a onClick={handleForgotPasswordClick} className="forgot-password__text">
             Forgot Password?
           </a>
         </Form.Item>

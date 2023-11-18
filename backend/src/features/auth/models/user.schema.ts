@@ -15,7 +15,7 @@ const userSchema: Schema = new Schema(
     avatarImage: { type: String, default: '' },
     createdAt: { type: Date, default: Date.now },
     passwordResetToken: { type: String, default: '' },
-    passwordResetExpires: { type: Date }
+    passwordResetExpires: { type: Number }
   },
   {
     toJSON: {
