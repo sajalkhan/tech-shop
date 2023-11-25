@@ -10,8 +10,8 @@ class CurrentUserRoutes {
   }
 
   public routes(): Router {
-    this.router.get('/currentUser', authMiddleware.checkAuthentication, CurrentUser.prototype.currentUserInfo);
-    this.router.get('/currentAdmin', authMiddleware.checkAuthentication, CurrentUser.prototype.currentAdminInfo);
+    this.router.get('/currentUser', authMiddleware.verifyUser, authMiddleware.checkAuthentication, CurrentUser.prototype.currentUserInfo);
+    this.router.get('/currentAdmin', authMiddleware.verifyUser, authMiddleware.checkAuthentication, CurrentUser.prototype.currentAdminInfo);
 
     return this.router;
   }
