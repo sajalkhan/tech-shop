@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { User } from '@/constant/types';
 import { ROUTES } from '@/routes/constant';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useResetPassword } from '@/services/useResetPassword';
+import { useResetPassword } from '@/services/auth/useResetPassword';
 import ResetPasswordForm from '@/components/molecules/reset-passwordForm';
 
 const ResetPassword = () => {

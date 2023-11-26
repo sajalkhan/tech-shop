@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { User } from '@/constant/types';
 import toast from 'react-hot-toast';
-import { useUpdatePassword } from '@/services/useUpdatePassword';
+import { useUpdatePassword } from '@/services/auth/useUpdatePassword';
 import UpdatePasswordForm from '@/components/molecules/update-passwordForm';
 
 const UserPassword = () => {

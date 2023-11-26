@@ -1,4 +1,5 @@
 import Navigation from '@/components/atoms/navigation';
+import CategoryForm from '@/components/molecules/category-form';
 import ForgotPasswordForm from '@/components/molecules/forgot-passwordForm';
 import LoginForm from '@/components/molecules/login-form';
 import RegistrationForm from '@/components/molecules/registration-form';
@@ -33,6 +34,16 @@ const Demo = () => {
 
       <hr />
       <ResetPasswordForm
+        isLoading={false}
+        isGetResponse={false}
+        onSubmit={() => {
+          console.log('call');
+        }}
+        setIsLoading={() => false}
+      />
+
+      <hr />
+      <CategoryForm
         isLoading={false}
         isGetResponse={false}
         onSubmit={() => {

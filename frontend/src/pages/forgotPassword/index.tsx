@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { User } from '@/constant/types';
-import { useForgotPassword } from '@/services/useForgotPassword ';
+import { useForgotPassword } from '@/services/auth/useForgotPassword ';
 import ForgotPasswordForm from '@/components/molecules/forgot-passwordForm';
 
 const ForgotPassword = () => {

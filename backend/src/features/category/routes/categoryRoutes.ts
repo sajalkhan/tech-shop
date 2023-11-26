@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { Category } from '@category/contorollers/category';
+import { Category } from '@category/controllers/category';
 import { authMiddleware } from '@global/helpers/auth-middleware';
 
 class CategoryRoutes {

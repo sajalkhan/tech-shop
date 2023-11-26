@@ -5,7 +5,7 @@ import { ROUTES } from '@/routes/constant';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '@/store/useUserStore';
 import useLocalStorage from '@/hooks/useLocalStorage';
-import { useLoginUser } from '@/services/useLoginUser';
+import { useLoginUser } from '@/services/auth/useLoginUser';
 import LoginForm from '@/components/molecules/login-form';
 
 const Login = () => {

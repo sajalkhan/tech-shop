@@ -5,8 +5,8 @@ import { ROUTES } from '@/routes/constant';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '@/store/useUserStore';
 import Navigation from '@/components/atoms/navigation';
-import { useLogoutUser } from '@/services/useLogoutUser';
-import { useGetCurrentUserInfo } from '@/services/useGetCurrentUser';
+import { useLogoutUser } from '@/services/auth/useLogoutUser';
+import { useGetCurrentUserInfo } from '@/services/auth/useGetCurrentUser';
 import toast, { Toaster } from 'react-hot-toast';
 
 import useLocalStorage from '@/hooks/useLocalStorage';

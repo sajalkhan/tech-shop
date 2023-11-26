@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { User } from '@/constant/types';
 import { ROUTES } from '@/routes/constant';
 import { useNavigate } from 'react-router-dom';
-import { useRegisterUser } from '@/services/useRegisterUser';
+import { useRegisterUser } from '@/services/auth/useRegisterUser';
 import RegistrationForm from '@/components/molecules/registration-form';
 
 const Register = () => {

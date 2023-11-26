@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import useLocalStorage from '@/hooks/useLocalStorage';
-import { useGetCurrentAdminInfo } from '@/services/useGetCurrentAdmin';
+import { useGetCurrentAdminInfo } from '@/services/auth/useGetCurrentAdmin';
 import { LoadingToRedirect } from '@/components/atoms/loadingToRedirect';
 
 interface UserRouteProps {

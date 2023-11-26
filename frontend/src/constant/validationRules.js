@@ -6,6 +6,13 @@ export const nameRules = [
   },
 ];
 
+export const categoryRules = [
+  {
+    required: true,
+    message: 'Please enter category name!',
+  },
+];
+
 export const emailRules = [
   {
     type: 'email',
