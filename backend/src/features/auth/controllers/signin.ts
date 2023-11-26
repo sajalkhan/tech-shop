@@ -43,6 +43,7 @@ export class SignIn {
       username: existingUser!.username,
       email: existingUser!.email,
       uId: existingUser!.uId,
+      role: existingUser!.role,
       createdAt: existingUser!.createdAt
     } as IUserDocument;
 

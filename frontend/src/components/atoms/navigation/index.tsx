@@ -26,6 +26,13 @@ const Navigation: React.FC<NavigationProps> = ({ onClick, logout }) => {
         ...item,
         label: `Welcome, ${user.username}`,
         key: `Welcome, ${user.username}`,
+        children: [
+          {
+            ...item.children[0],
+            key: user.role === 'admin' ? '/admin' : '/user',
+          },
+          ...item.children.slice(1),
+        ],
       };
     }
     return item;

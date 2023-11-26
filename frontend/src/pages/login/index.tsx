@@ -26,7 +26,9 @@ const Login = () => {
         addUser({ ...data.user, token: data.token });
         toast.success('User Login successfully!');
         setIsLoading(false);
-        setTimeout(() => navigate(ROUTES.USER), 2500);
+        setTimeout(() => {
+          data.user.role === 'admin' ? navigate(ROUTES.ADMIN) : navigate(ROUTES.USER);
+        }, 2500);
       },
       onError: (err: Error) => {
         toast.error(err.message);

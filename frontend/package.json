@@ -26,6 +26,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.12.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
@@ -49,9 +50,7 @@
     "prettier-write:ts": "prettier --write \"*.@(ts|tsx|js|jsx|scss)\"",
     "prettier-write:script": "prettier --write \"src/**/*.@(ts|tsx)\"",
     "prettier-write:style": "prettier --write \"src/**/*.@(scss)\"",
-    "gen:component": "hygen component new",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "gen:component": "hygen component new"
   },
   "browserslist": {
     "production": [
@@ -66,20 +65,9 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.4.19",
-    "@storybook/addon-essentials": "^6.4.19",
-    "@storybook/addon-interactions": "^6.4.19",
-    "@storybook/addon-links": "^6.4.19",
-    "@storybook/builder-webpack5": "^6.4.19",
-    "@storybook/manager-webpack5": "^6.4.19",
-    "@storybook/node-logger": "^6.4.19",
-    "@storybook/preset-create-react-app": "^4.1.0",
-    "@storybook/react": "^6.4.19",
-    "@storybook/testing-library": "^0.0.9",
     "@types/optimize-css-assets-webpack-plugin": "^5.0.5",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.17.0",
-    "@whitespace/storybook-addon-html": "^5.1.6",
     "change-case": "^4.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.12.0",

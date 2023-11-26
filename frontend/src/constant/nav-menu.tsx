@@ -7,10 +7,14 @@ import {
   ShoppingCartOutlined,
   LogoutOutlined,
   HistoryOutlined,
-  EditOutlined,
   HeartOutlined,
   HomeOutlined,
 } from '@ant-design/icons';
+
+import { MdProductionQuantityLimits } from 'react-icons/md';
+import { TbBrandProducthunt, TbCategoryMinus } from 'react-icons/tb';
+import { BiCategory } from 'react-icons/bi';
+import { RiCoupon3Line, RiLockPasswordLine } from 'react-icons/ri';
 
 export const NavigationItems: MenuProps['items'] = [
   {
@@ -47,8 +51,8 @@ export const NavigationItems: MenuProps['items'] = [
     className: 'float-right',
     children: [
       {
-        label: 'Option 1',
-        key: 'setting:1',
+        label: 'Dashboard',
+        key: '/user',
       },
       {
         label: 'Logout',
@@ -68,11 +72,44 @@ export const UserNavigationItems: MenuProps['items'] = [
   {
     label: 'Update Password',
     key: '/user/password',
-    icon: <EditOutlined rev={undefined} />,
+    icon: <RiLockPasswordLine />,
   },
   {
     label: 'WishList',
     key: '/user/wishlist',
     icon: <HeartOutlined rev={undefined} />,
+  },
+];
+
+export const AdminNavigationItems: MenuProps['items'] = [
+  {
+    label: 'Product',
+    key: '/admin/product',
+    icon: <MdProductionQuantityLimits />,
+  },
+  {
+    label: 'Products',
+    key: '/admin/products',
+    icon: <TbBrandProducthunt />,
+  },
+  {
+    label: 'Category',
+    key: '/admin/category',
+    icon: <BiCategory />,
+  },
+  {
+    label: 'Sub Category',
+    key: '/admin/sub',
+    icon: <TbCategoryMinus />,
+  },
+  {
+    label: 'Coupon',
+    key: '/admin/coupon',
+    icon: <RiCoupon3Line />,
+  },
+  {
+    label: 'Update Password',
+    key: '/user/password',
+    icon: <RiLockPasswordLine />,
   },
 ];
