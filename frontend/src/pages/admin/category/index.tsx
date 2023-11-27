@@ -1,11 +1,12 @@
 import toast from 'react-hot-toast';
 import { useState, useEffect } from 'react';
-import { Divider, List, Space, Modal, Button, Input } from 'antd';
+import { Divider, List, Space, Modal, Button, Input, Popconfirm } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import CategoryForm from '@/components/molecules/category-form';
 import { useAddCategory } from '@/services/category/useAddCategory';
 import { useEditCategory } from '@/services/category/useEditCategory';
 import { useGetAllCategories } from '@/services/category/useGetAllCategories';
+import { useDeleteCategory } from '@/services/category/useAddCategory copy';
 
 const Category = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +18,7 @@ const Category = () => {
 
   const { mutate: addCategory } = useAddCategory();
   const { mutate: editCategory } = useEditCategory();
+  const { mutate: deleteCategory } = useDeleteCategory();
   const { data: categories, refetch: refetchAllCategories } = useGetAllCategories();
 
   useEffect(() => {
@@ -67,8 +69,16 @@ const Category = () => {
     );
   };
 
-  const handleDelete = (id: number) => {
-    console.log(`Delete item with id ${id}`);
+  const handleDelete = (slug: string) => {
+    deleteCategory(slug, {
+      onSuccess: () => {
+        refetchAllCategories();
+        toast.success('Category Deleted Successfully!');
+      },
+      onError: (err: any) => {
+        toast.error(err.message);
+      },
+    });
   };
 
   return (
@@ -91,7 +101,17 @@ const Category = () => {
                 <span>{item.name}</span>
                 <div>
                   <EditOutlined onClick={() => handleEdit(item.slug)} style={{ color: 'blue', marginRight: '20px' }} />
-                  <DeleteOutlined onClick={() => handleDelete(item.slug)} style={{ color: 'red' }} />
+
+                  <Popconfirm
+                    title="Delete the item"
+                    placement="topRight"
+                    description="Are you sure to delete this category?"
+                    onConfirm={() => handleDelete(item.slug)}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <DeleteOutlined style={{ color: 'red' }} />
+                  </Popconfirm>
                 </div>
               </Space>
             </List.Item>
