@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Divider, List, Space, Modal, Button, Input, Popconfirm } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import CategoryForm from '@/components/molecules/category-form';
@@ -20,6 +20,8 @@ const Category = () => {
   const { mutate: editCategory } = useEditCategory();
   const { mutate: deleteCategory } = useDeleteCategory();
   const { data: categories, refetch: refetchAllCategories } = useGetAllCategories();
+  const [searchValue, setSearchValue] = useState('');
+  const inputRef = useRef<any>(null);
 
   useEffect(() => {
     !categories && refetchAllCategories();
@@ -81,8 +83,27 @@ const Category = () => {
     });
   };
 
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
+    inputRef.current?.focus();
+  };
+
+  const filteredCategories = categories
+    ? categories.filter((item: any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))
+    : [];
+
   return (
     <div className="p-category">
+      <Input.Search
+        ref={inputRef}
+        placeholder="Search.."
+        style={{ width: '30rem', float: 'right' }}
+        onSearch={handleSearch}
+        onChange={e => handleSearch(e.target.value)}
+      />
+
+      <Divider>Create Category</Divider>
+
       <CategoryForm
         isLoading={isLoading}
         onSubmit={handleSubmit}
@@ -90,11 +111,9 @@ const Category = () => {
         setIsLoading={setIsLoading}
       />
 
-      <Divider>Category List</Divider>
-
-      {categories && (
+      {filteredCategories && (
         <List
-          dataSource={categories}
+          dataSource={filteredCategories}
           renderItem={(item: any) => (
             <List.Item>
               <Space style={{ width: '100%', justifyContent: 'space-between' }}>

@@ -23,12 +23,12 @@ const CategoryForm = ({ onSubmit, isGetResponse, setIsLoading, isLoading }: TCat
 
   return (
     <Form form={form} labelCol={{ span: 10 }} onFinish={onFinish} layout="vertical">
-      <Form.Item label="Category" name="name" rules={categoryRules}>
+      <Form.Item label="Name" name="name" rules={categoryRules}>
         <Input placeholder="Please Enter category name" />
       </Form.Item>
 
       <Button size="middle" type="primary" htmlType="submit" loading={isLoading}>
-        Submit
+        Save
       </Button>
     </Form>
   );
