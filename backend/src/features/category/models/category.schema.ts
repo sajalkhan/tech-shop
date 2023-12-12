@@ -4,7 +4,7 @@ import { ICategoryDocument } from '@category/interfaces/category.interface';
 const categorySchema: Schema = new Schema(
   {
     name: { type: String },
-    slug: { type: String }
+    slug: { type: String, unique: true, lowercase: true }
   },
   {
     timestamps: true
