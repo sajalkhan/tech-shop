@@ -75,7 +75,7 @@ const Category = () => {
     deleteCategory(slug, {
       onSuccess: () => {
         refetchAllCategories();
-        toast.success('Category Deleted Successfully!');
+        toast.success(`${slug} Deleted Successfully!`);
       },
       onError: (err: any) => {
         toast.error(err.message);

@@ -4,7 +4,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Divider, List, Space, Modal, Button, Input, Select, Popconfirm } from 'antd';
 import CategoryForm from '@/components/molecules/category-form';
 import { useEditSubCategory } from '@/services/subCategory/useEditSubCategory';
-import { useDeleteCategory } from '@/services/category/useDeleteCategory';
+import { useDeleteSubCategory } from '@/services/subCategory/useDeleteSubCategory';
 import { useGetAllCategories } from '@/services/category/useGetAllCategories';
 import { useAddSubCategory } from '@/services/subCategory/useAddSubCategory';
 import { useGetAllSubCategories } from '@/services/subCategory/useGetAllCategories';
@@ -23,7 +23,7 @@ const SubCategory = () => {
 
   const inputRef = useRef<any>(null);
   const { mutate: editSubCategory } = useEditSubCategory();
-  const { mutate: deleteCategory } = useDeleteCategory();
+  const { mutate: deleteSubCategory } = useDeleteSubCategory();
   const { mutate: addSubCategory } = useAddSubCategory();
   const { mutate: getSubCategoryById } = useGetSubCategoryByCategoryId();
   const { data: categories, refetch: refetchAllCategories } = useGetAllCategories();
@@ -115,10 +115,10 @@ const SubCategory = () => {
   };
 
   const handleDelete = (slug: string) => {
-    deleteCategory(slug, {
+    deleteSubCategory(slug, {
       onSuccess: () => {
-        refetchAllCategories();
-        toast.success('Category Deleted Successfully!');
+        refetchAllSubCategories();
+        toast.success(`${slug} Deleted Successfully!`);
       },
       onError: (err: any) => {
         toast.error(err.message);
