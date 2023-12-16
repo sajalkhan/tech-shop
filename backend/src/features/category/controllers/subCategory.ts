@@ -60,4 +60,11 @@ export class SubCategory {
 
     res.status(HTTP_STATUS.OK).json(allSubCategory);
   }
+
+  public async subCategoryListByParentId(req: Request, res: Response): Promise<void> {
+    const { parent } = req.body;
+    const allSubCategory = await SubCategoryService.getAllSubCategoryByParentId(parent);
+
+    res.status(HTTP_STATUS.OK).json(allSubCategory);
+  }
 }

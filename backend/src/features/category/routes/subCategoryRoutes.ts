@@ -11,6 +11,7 @@ class SubCategoryRoutes {
 
   public routes(): Router {
     this.router.post('/subCategory', authMiddleware.verifyUser, authMiddleware.checkAdmin, SubCategory.prototype.create);
+    this.router.post('/subCategoriesById', SubCategory.prototype.subCategoryListByParentId);
     this.router.get('/subCategories', SubCategory.prototype.subCategoryList);
     this.router.get('/subCategory/:slug', SubCategory.prototype.red);
     this.router.put('/subCategory/:slug', authMiddleware.verifyUser, authMiddleware.checkAdmin, SubCategory.prototype.update);

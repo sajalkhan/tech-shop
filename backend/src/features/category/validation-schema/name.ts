@@ -17,7 +17,7 @@ const SubCategorySchema: ObjectSchema = Joi.object().keys({
     'string.empty': 'SubCategory name is required'
   }),
   parent: Joi.string().required().messages({
-    'string.empty': 'SubCategory name is required'
+    'string.empty': 'Category name is required'
   })
 });
 

@@ -4,12 +4,13 @@ import { categoryRules } from '../../../constant/validationRules';
 
 type TCategoryForm = {
   isLoading: boolean;
+  placeholder: string;
   isGetResponse: boolean;
   onSubmit: (value: any) => void;
   setIsLoading: (value: boolean) => void;
 };
 
-const CategoryForm = ({ onSubmit, isGetResponse, setIsLoading, isLoading }: TCategoryForm) => {
+const CategoryForm = ({ onSubmit, isGetResponse, placeholder, setIsLoading, isLoading }: TCategoryForm) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const CategoryForm = ({ onSubmit, isGetResponse, setIsLoading, isLoading }: TCat
   return (
     <Form form={form} labelCol={{ span: 10 }} onFinish={onFinish} layout="vertical">
       <Form.Item label="Name" name="name" rules={categoryRules}>
-        <Input placeholder="Please Enter category name" />
+        <Input placeholder={placeholder} />
       </Form.Item>
 
       <Button size="middle" type="primary" htmlType="submit" loading={isLoading}>

@@ -50,6 +50,7 @@ const Demo = () => {
           console.log('call');
         }}
         setIsLoading={() => false}
+        placeholder="Please Enter Category name"
       />
     </div>
   );

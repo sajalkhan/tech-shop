@@ -1,4 +1,5 @@
 import slugify from 'slugify';
+import mongoose from 'mongoose';
 import { ISubCategoryDocument } from '@category/interfaces/subCategory.interface';
 import { SubCategoryModal } from '@category/models/subCategory.schema';
 
@@ -38,6 +39,18 @@ class subCategoryService {
   public async getAllSubCategory(): Promise<ISubCategoryDocument> {
     const subCategoryName: ISubCategoryDocument = (await SubCategoryModal.find({}).sort({ createdAt: -1 }).exec()) as never;
     return subCategoryName;
+  }
+
+  public async getAllSubCategoryByParentId(parentId: string): Promise<ISubCategoryDocument[]> {
+    let subCategories: ISubCategoryDocument[] = [];
+
+    if (parentId === 'all') {
+      subCategories = await SubCategoryModal.find({}).sort({ createdAt: -1 }).lean().exec();
+    } else if (mongoose.Types.ObjectId.isValid(parentId)) {
+      subCategories = await SubCategoryModal.find({ parent: parentId }).sort({ createdAt: -1 }).lean().exec();
+    }
+
+    return subCategories;
   }
 }
 

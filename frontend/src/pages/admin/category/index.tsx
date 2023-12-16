@@ -6,7 +6,7 @@ import CategoryForm from '@/components/molecules/category-form';
 import { useAddCategory } from '@/services/category/useAddCategory';
 import { useEditCategory } from '@/services/category/useEditCategory';
 import { useGetAllCategories } from '@/services/category/useGetAllCategories';
-import { useDeleteCategory } from '@/services/category/useAddCategory copy';
+import { useDeleteCategory } from '@/services/category/useDeleteCategory';
 
 const Category = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -109,6 +109,7 @@ const Category = () => {
         onSubmit={handleSubmit}
         isGetResponse={response}
         setIsLoading={setIsLoading}
+        placeholder="Please Enter Category Name"
       />
 
       {filteredCategories && (
