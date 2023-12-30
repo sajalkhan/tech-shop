@@ -1,12 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import CreateProductForm from '@/components/molecules/createProduct-form';
 import { useCreateProduct } from '@/services/product/useCreateProduct';
+import CreateProductForm from '@/components/molecules/createProduct-form';
+import { useGetAllCategories } from '@/services/category/useGetAllCategories';
+import { useGetSubCategoryByCategoryId } from '@/services/subCategory/useGetSubCategoryBycategory';
 
 const Product = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(false);
+  const [subCategory, setSubCategory] = useState<[{ value: string; label: string }] | []>([]);
+
   const { mutate: createProduct } = useCreateProduct();
+  const { mutate: getSubCategoryById } = useGetSubCategoryByCategoryId();
+  const { data: categories, refetch: refetchAllCategories } = useGetAllCategories();
+
+  useEffect(() => {
+    !categories && refetchAllCategories();
+  }, [categories, refetchAllCategories]);
+
+  const categoryOptions: any = categories
+    ? [...categories.map((item: any) => ({ value: item._id, label: item.name }))]
+    : [];
+
+  const handleChange = async (value: string) => {
+    getSubCategoryById(
+      { parent: value },
+      {
+        onSuccess: (data: any) => {
+          setSubCategory(data.map((item: any) => ({ value: item._id, label: item.name })));
+        },
+        onError: (err: any) => {
+          toast.error(err.message);
+        },
+      }
+    );
+  };
 
   const handleSubmit = async (data: string) => {
     setResponse(false);
@@ -31,6 +59,9 @@ const Product = () => {
         onSubmit={handleSubmit}
         isGetResponse={response}
         setIsLoading={setIsLoading}
+        handleChange={handleChange}
+        categoryOptions={categoryOptions}
+        subCategoryOptions={subCategory}
       />
     </div>
   );

@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { createProductRules } from '../../../constant/validationRules';
-import { useGetAllCategories } from '@/services/category/useGetAllCategories';
-import { useGetSubCategoryByCategoryId } from '@/services/subCategory/useGetSubCategoryBycategory';
 
 type TCreateProductForm = {
   isLoading: boolean;
   isGetResponse: boolean;
   onSubmit: (value: any) => void;
   setIsLoading: (value: boolean) => void;
+  handleChange: (value: string) => void;
+  subCategoryOptions: [{ value: string; label: string }] | [];
+  categoryOptions: [{ value: string; label: string } | []];
 };
 
 const productData = {
@@ -21,35 +21,20 @@ const productData = {
   ],
 };
 
-const CreateProductForm = ({ onSubmit, isGetResponse, setIsLoading, isLoading }: TCreateProductForm) => {
+const CreateProductForm = ({
+  onSubmit,
+  isGetResponse,
+  setIsLoading,
+  isLoading,
+  handleChange,
+  categoryOptions,
+  subCategoryOptions,
+}: TCreateProductForm) => {
   const [form] = Form.useForm();
-  const [subCategory, setSubCategory] = useState([]);
-  const { mutate: getSubCategoryById } = useGetSubCategoryByCategoryId();
-  const { data: categories, refetch: refetchAllCategories } = useGetAllCategories();
 
   useEffect(() => {
     isGetResponse && form.resetFields();
   }, [form, isGetResponse]);
-
-  useEffect(() => {
-    !categories && refetchAllCategories();
-  }, [categories, refetchAllCategories]);
-
-  const categoryOptions = categories ? [...categories.map((item: any) => ({ value: item._id, label: item.name }))] : [];
-
-  const handleChange = async (value: string) => {
-    getSubCategoryById(
-      { parent: value },
-      {
-        onSuccess: (data: any) => {
-          setSubCategory(data.map((item: any) => ({ value: item._id, label: item.name })));
-        },
-        onError: (err: any) => {
-          toast.error(err.message);
-        },
-      }
-    );
-  };
 
   const onFinish = (value: any) => {
     onSubmit(value);
@@ -91,7 +76,7 @@ const CreateProductForm = ({ onSubmit, isGetResponse, setIsLoading, isLoading }:
       </Form.Item>
 
       <Form.Item label="Sub Category" name="subCategory">
-        <Select mode="multiple" placeholder="Select subCategory" options={subCategory} />
+        <Select mode="multiple" placeholder="Select subCategory" options={subCategoryOptions} />
       </Form.Item>
 
       <Button size="middle" type="primary" htmlType="submit" loading={isLoading}>
