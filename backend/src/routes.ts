@@ -2,6 +2,7 @@ import { Application } from 'express';
 import { authRoutes } from '@auth/routes/authRoutes';
 import { categoryRoutes } from '@category/routes/categoryRoutes';
 import { subCategoryRoutes } from '@category/routes/subCategoryRoutes';
+import { productRoutes } from '@product/routes/productRoutes';
 import { currentUserRoutes } from '@auth/routes/currentUserRoutes';
 
 const BASE_PATH = '/api/v1';
@@ -16,6 +17,8 @@ export default (app: Application) => {
     app.use(BASE_PATH, categoryRoutes.routes());
     // Sub Category
     app.use(BASE_PATH, subCategoryRoutes.routes());
+    //product
+    app.use(BASE_PATH, productRoutes.routes());
   };
   routes();
 };

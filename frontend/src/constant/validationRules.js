@@ -24,6 +24,45 @@ export const emailRules = [
   },
 ];
 
+export const createProductRules = {
+  title: [
+    {
+      required: true,
+      message: 'Please enter product title!',
+    },
+  ],
+  price: [
+    {
+      required: true,
+      message: 'Please enter product price!',
+    },
+  ],
+  shipping: [
+    {
+      required: true,
+      message: 'Please select shipping option!',
+    },
+  ],
+  quantity: [
+    {
+      required: true,
+      message: 'Please select quantity!',
+    },
+  ],
+  color: [
+    {
+      required: true,
+      message: 'Please select color!',
+    },
+  ],
+  brand: [
+    {
+      required: true,
+      message: 'Please select brand!',
+    },
+  ],
+};
+
 export const passwordRules = [
   {
     required: true,
