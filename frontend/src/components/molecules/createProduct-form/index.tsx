@@ -9,7 +9,7 @@ type TCreateProductForm = {
   setIsLoading: (value: boolean) => void;
   handleChange: (value: string) => void;
   subCategoryOptions: [{ value: string; label: string }] | [];
-  categoryOptions: [{ value: string; label: string } | []];
+  categoryOptions: [{ value: string; label: string }] | [];
 };
 
 const productData = {
