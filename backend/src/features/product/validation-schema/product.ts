@@ -1,6 +1,10 @@
 import Joi, { ObjectSchema } from 'joi';
 
 const ProductValidationSchema: ObjectSchema = Joi.object().keys({
+  images: Joi.array().items(Joi.string()).min(1).required().messages({
+    'array.base': 'Product image must be an array',
+    'array.min': 'At least one product image is required'
+  }),
   title: Joi.string().required().min(3).max(32).trim().messages({
     'string.base': 'Title must be of type string',
     'string.min': 'Title is too short',

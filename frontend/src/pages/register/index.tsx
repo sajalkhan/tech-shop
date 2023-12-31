@@ -18,6 +18,7 @@ const Register = () => {
     await mutate(userData, {
       onSuccess: () => {
         setResponse(true);
+        setIsLoading(false);
         toast.success('User register successfully!');
 
         setTimeout(() => {
@@ -25,6 +26,7 @@ const Register = () => {
         }, 2500);
       },
       onError: (err: any) => {
+        setIsLoading(false);
         toast.error(err.message);
       },
     });

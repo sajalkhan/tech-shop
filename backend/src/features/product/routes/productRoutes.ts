@@ -4,13 +4,16 @@ import { authMiddleware } from '@global/helpers/auth-middleware';
 
 class ProductRoutes {
   private router: Router;
+  private product: Product; // Add this property
 
   constructor() {
     this.router = express.Router();
+    this.product = new Product(); // Create an instance of the Product class
   }
 
   public routes(): Router {
-    this.router.post('/createProduct', authMiddleware.verifyUser, authMiddleware.checkAdmin, Product.prototype.create);
+    // Attach the create method with the correct instance
+    this.router.post('/createProduct', authMiddleware.verifyUser, authMiddleware.checkAdmin, this.product.create.bind(this.product));
     return this.router;
   }
 }

@@ -25,6 +25,12 @@ export const emailRules = [
 ];
 
 export const createProductRules = {
+  image: [
+    {
+      required: true,
+      message: 'Please upload images!',
+    },
+  ],
   title: [
     {
       required: true,
