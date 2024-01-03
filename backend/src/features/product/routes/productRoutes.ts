@@ -14,6 +14,7 @@ class ProductRoutes {
   public routes(): Router {
     // Attach the create method with the correct instance
     this.router.post('/createProduct', authMiddleware.verifyUser, authMiddleware.checkAdmin, this.product.create.bind(this.product));
+    this.router.get('/products/:count', this.product.red.bind(this.product));
     return this.router;
   }
 }

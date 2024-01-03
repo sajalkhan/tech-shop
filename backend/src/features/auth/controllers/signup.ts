@@ -2,7 +2,6 @@ import JWT from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
 import { Request, Response } from 'express';
 import HTTP_STATUS from 'http-status-codes';
-import { UploadApiResponse } from 'cloudinary';
 import { config } from '@root/config';
 import { Helpers } from '@global/helpers/helpers';
 import { authService } from '@service/db/auth.service';
@@ -32,8 +31,8 @@ export class SignUp {
       password
     });
 
-    const result = await this.uploadAvatar(avatarImage, userObjectId);
-    userData.avatarImage = `https://res.cloudinary.com/${config.CLOUD_NAME}/image/upload/v${result.version}/techShop/profileImage/${userObjectId}`;
+    const result = await this.uploadAvatar(avatarImage);
+    userData.avatarImage = result;
 
     // Add to database
     await authService.createAuthUser(userData);
@@ -43,12 +42,10 @@ export class SignUp {
     res.status(HTTP_STATUS.CREATED).json({ message: 'User created successfully', userData, token: userJwt });
   }
 
-  private async uploadAvatar(avatarImage: string, userObjectId: ObjectId): Promise<UploadApiResponse> {
-    const result = await uploads(avatarImage, 'techShop/profileImage', `${userObjectId}`);
-
-    if (result && 'public_id' in result) {
-      return result as UploadApiResponse;
-    } else {
+  private async uploadAvatar(avatarImage: string) {
+    try {
+      return (await uploads(avatarImage, 'techShop/profileImage')).url;
+    } catch (error) {
       throw new BadRequestError('File upload: Error occurred. Try again.');
     }
   }

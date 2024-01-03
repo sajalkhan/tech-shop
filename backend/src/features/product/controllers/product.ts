@@ -1,9 +1,7 @@
 import slugify from 'slugify';
 import { MongoError } from 'mongodb';
-import { config } from '@root/config';
 import { Request, Response } from 'express';
 import HTTP_STATUS from 'http-status-codes';
-import { UploadApiResponse } from 'cloudinary';
 import { uploads } from '@global/helpers/coludinary-upload';
 import { productService } from '@service/db/product.service';
 import { BadRequestError } from '@global/helpers/error-handler';
@@ -18,7 +16,7 @@ export class Product {
       const slug = slugify(title);
       const productData = { images, title, description, price, slug, shipping, quantity, color, brand, category, subCategory };
 
-      const imageUrls = await this.uploadImages(images, title);
+      const imageUrls = await this.uploadImages(images);
 
       // Add the imageUrls to the productData
       productData.images = imageUrls;
@@ -31,29 +29,28 @@ export class Product {
     }
   }
 
-  private async uploadImages(images: string[], title: string): Promise<string[]> {
+  public async red(req: Request, res: Response): Promise<void> {
+    const { count } = req.params;
+    const products = await productService.getProductsByCount(parseInt(count));
+    if (!products) throw new BadRequestError('products not found!');
+
+    res.status(HTTP_STATUS.OK).json(products);
+  }
+
+  private async uploadImages(images: string[]) {
     try {
-      const uploadedImages = await Promise.all(images.map((image: string) => this.uploadProductImage(image, title)));
-      return uploadedImages.map(
-        (result) => `https://res.cloudinary.com/${config.CLOUD_NAME}/image/upload/v${result.version}/techShop/productImage/${title}`
-      );
+      return await Promise.all(images.map((image: string) => this.uploadProductImage(image)));
     } catch (error) {
       console.error('Error in uploadImages:', error);
       throw error;
     }
   }
 
-  private async uploadProductImage(productImage: string, title: string): Promise<UploadApiResponse> {
+  private async uploadProductImage(productImage: string) {
     try {
-      const result = await uploads(productImage, `techShop/productImage/${title}`);
-      if (result && 'public_id' in result) {
-        return result as UploadApiResponse;
-      } else {
-        throw new BadRequestError('File upload: Error occurred. Try again.');
-      }
+      return (await uploads(productImage, 'techShop/productImage')).url;
     } catch (error) {
-      console.error('Error in uploadProductImage:', error);
-      throw error;
+      throw new BadRequestError('File upload: Error occurred. Try again.');
     }
   }
 
