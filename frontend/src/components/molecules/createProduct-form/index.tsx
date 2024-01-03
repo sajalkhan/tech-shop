@@ -36,11 +36,10 @@ const CreateProductForm = ({
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
-    if (!isLoading) setFileList([]);
-  }, [isLoading]);
-
-  useEffect(() => {
-    isGetResponse && form.resetFields();
+    if (isGetResponse) {
+      form.resetFields();
+      setFileList([]);
+    }
   }, [form, isGetResponse]);
 
   const handleImageChange = ({ fileList }: { fileList: UploadFile[] }) => {
