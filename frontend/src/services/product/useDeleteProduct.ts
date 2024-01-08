@@ -2,15 +2,15 @@ import axios from '@/utils/axiosConfig';
 import { useMutation } from 'react-query';
 import axiosErrorHandler from '@/utils/axiosErrorHandler';
 
-const createProduct = async (data: any) => {
+const deleteProduct = async (id: string) => {
   try {
-    const response = await axios.post('/product', data);
+    const response = await axios.delete(`/product/${id}`);
     return response.data;
   } catch (error: any) {
     return axiosErrorHandler(error);
   }
 };
 
-export const useCreateProduct = () => {
-  return useMutation(createProduct);
+export const useDeleteProduct = () => {
+  return useMutation(deleteProduct);
 };

@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useCreateProduct } from '@/services/product/useCreateProduct';
 import CreateProductForm from '@/components/molecules/createProduct-form';
 import { useGetAllCategories } from '@/services/category/useGetAllCategories';
-import { useGetSubCategoryByCategoryId } from '@/services/subCategory/useGetSubCategoryBycategory';
+import { useGetSubCategoryByCategoryId } from '@/services/subCategory/useGetSubCategoryById';
 
 const Product = () => {
   const [isLoading, setIsLoading] = useState(false);

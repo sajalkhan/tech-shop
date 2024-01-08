@@ -1,0 +1,20 @@
+.productDetails {
+  width: 100%;
+  margin-bottom: 16px;
+
+  &__edit {
+    color: blue !important;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__delete {
+    color: red !important;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

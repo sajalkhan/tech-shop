@@ -8,7 +8,7 @@ import { useDeleteSubCategory } from '@/services/subCategory/useDeleteSubCategor
 import { useGetAllCategories } from '@/services/category/useGetAllCategories';
 import { useAddSubCategory } from '@/services/subCategory/useAddSubCategory';
 import { useGetAllSubCategories } from '@/services/subCategory/useGetAllCategories';
-import { useGetSubCategoryByCategoryId } from '@/services/subCategory/useGetSubCategoryBycategory';
+import { useGetSubCategoryByCategoryId } from '@/services/subCategory/useGetSubCategoryById';
 
 const SubCategory = () => {
   const [editItem, setEditItem] = useState('');

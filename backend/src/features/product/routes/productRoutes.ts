@@ -13,8 +13,11 @@ class ProductRoutes {
 
   public routes(): Router {
     // Attach the create method with the correct instance
-    this.router.post('/createProduct', authMiddleware.verifyUser, authMiddleware.checkAdmin, this.product.create.bind(this.product));
+    this.router.post('/product', authMiddleware.verifyUser, authMiddleware.checkAdmin, this.product.create.bind(this.product));
     this.router.get('/products/:count', this.product.red.bind(this.product));
+    this.router.delete('/product/:id', authMiddleware.verifyUser, authMiddleware.checkAdmin, this.product.delete.bind(this.product));
+    this.router.get('/product/:id', this.product.productDetails.bind(this.product));
+    this.router.put('/product/:title', authMiddleware.verifyUser, authMiddleware.checkAdmin, this.product.update.bind(this.product));
     return this.router;
   }
 }

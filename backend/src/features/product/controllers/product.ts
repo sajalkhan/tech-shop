@@ -37,6 +37,52 @@ export class Product {
     res.status(HTTP_STATUS.OK).json(products);
   }
 
+  public async update(req: Request, res: Response): Promise<void> {
+    try {
+      const { images, title, description, price, shipping, quantity, color, brand, category, subCategory } = req.body;
+      const slug = slugify(title);
+      const productData = { images, title, description, price, slug, shipping, quantity, color, brand, category, subCategory };
+
+      const imageUrls = await this.uploadImages(images);
+
+      // Add the imageUrls to the productData
+      productData.images = imageUrls;
+
+      const updateProduct = await productService.updateProduct(productData as never, req.params.title);
+      if (!updateProduct) throw new BadRequestError('Product not found!');
+
+      res.status(HTTP_STATUS.CREATED).json({ message: 'Product Updated successfully', data: productData });
+    } catch (error) {
+      this.handleCreateError(error, res);
+    }
+  }
+
+  public async delete(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const deleteProduct = await productService.deleteProductById(id);
+
+      if (!deleteProduct) {
+        throw new BadRequestError('Product not found!');
+      }
+
+      res.status(HTTP_STATUS.OK).json({
+        message: 'Product deleted successfully',
+        deleteProduct
+      });
+    } catch (error) {
+      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: `Internal Server Error ${error}` });
+    }
+  }
+
+  public async productDetails(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const product = await productService.getProductById(id);
+    if (!product) throw new BadRequestError('product not found!');
+
+    res.status(HTTP_STATUS.OK).json(product);
+  }
+
   private async uploadImages(images: string[]) {
     try {
       return await Promise.all(images.map((image: string) => this.uploadProductImage(image)));
@@ -48,7 +94,15 @@ export class Product {
 
   private async uploadProductImage(productImage: string) {
     try {
-      return (await uploads(productImage, 'techShop/productImage')).url;
+      // Check if productImage already contains "res.cloudinary.com"
+      if (productImage.includes('res.cloudinary.com')) {
+        // If it does, return the original URL without uploading
+        return productImage;
+      }
+
+      // If not, proceed with the upload
+      const uploadedImage = await uploads(productImage, 'techShop/productImage');
+      return uploadedImage.url;
     } catch (error) {
       throw new BadRequestError('File upload: Error occurred. Try again.');
     }

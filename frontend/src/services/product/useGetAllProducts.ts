@@ -12,11 +12,5 @@ const getAllProducts = async (items: number) => {
 };
 
 export const useGetAllProducts = (items: number) => {
-  return useQuery(['products', items], () => getAllProducts(items), {
-    enabled: false,
-    staleTime: 5000,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchIntervalInBackground: false,
-  });
+  return useQuery(['products', items], () => getAllProducts(items));
 };

@@ -16,6 +16,27 @@ class ProductService {
 
     return productList;
   }
+
+  public async getProductById(id: string): Promise<IProductDocument> {
+    const product: IProductDocument = (await ProductModal.findOne({
+      _id: id
+    }).exec()) as IProductDocument;
+    return product;
+  }
+
+  public async deleteProductById(id: string): Promise<IProductDocument> {
+    const product: IProductDocument = (await ProductModal.findOneAndDelete({
+      _id: id
+    }).exec()) as IProductDocument;
+    return product;
+  }
+
+  public async updateProduct(data: IProductDocument, title: string): Promise<IProductDocument> {
+    const product: IProductDocument = (await ProductModal.findOneAndUpdate({ title: title }, data, {
+      new: true
+    }).exec()) as IProductDocument;
+    return product;
+  }
 }
 
 export const productService: ProductService = new ProductService();
