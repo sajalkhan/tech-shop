@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { Row, Col, Modal, Button, FormInstance } from 'antd';
 import EditProductForm from '@/components/molecules/editProduct-form';
-import ProductDetails from '@/components/molecules/productDetails';
+import ProductCard from '@/components/molecules/productCard';
 import { useUpdateProduct } from '@/services/product/useUpdateProduct';
 import { useDeleteProduct } from '@/services/product/useDeleteProduct';
 import { useGetAllProducts } from '@/services/product/useGetAllProducts';
@@ -127,7 +127,7 @@ const Products = () => {
         <Row gutter={[16, 16]}>
           {products.map((item: any, indx: number) => (
             <Col key={indx} xs={24} sm={12} md={8} lg={6}>
-              <ProductDetails item={item} handleEdit={handleEdit} handleDelete={handleDelete} />
+              <ProductCard item={item} handleEdit={handleEdit} handleDelete={handleDelete} userRole="admin" />
             </Col>
           ))}
         </Row>

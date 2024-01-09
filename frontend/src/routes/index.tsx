@@ -1,3 +1,4 @@
+import { Flex, Spin } from 'antd';
 import { Suspense, lazy } from 'react';
 import { ROUTES } from '@/routes/constant';
 import { UserRoute } from '@/routes/userRoute';
@@ -14,7 +15,13 @@ const ForgotPassword = lazy(() => import('@/pages/forgotPassword'));
 const ResetPassword = lazy(() => import('@/pages/resetPassword'));
 
 export const AppRouter = () => (
-  <Suspense fallback="Loading...">
+  <Suspense
+    fallback={
+      <Flex align="middle" justify="center" style={{ minHeight: '100vh' }}>
+        <Spin size="large" />
+      </Flex>
+    }
+  >
     <Routes>
       <Route path={ROUTES.DEMO} element={<Demo />} />
       <Route path={ROUTES.HOME} element={<Home />} />
