@@ -1,3 +1,4 @@
+import { SortOrder } from 'mongoose';
 import { IProductDocument } from '@product/interfaces/product.interface';
 import { ProductModal } from '@product/models/product.schema';
 
@@ -22,6 +23,17 @@ class ProductService {
       _id: id
     }).exec()) as IProductDocument;
     return product;
+  }
+
+  public async getProductList(sort: string, order: SortOrder, limit: number) {
+    const products = await ProductModal.find({})
+      .populate('category')
+      .populate('subCategory')
+      .sort([[sort, order]])
+      .limit(limit)
+      .exec();
+
+    return products;
   }
 
   public async deleteProductById(id: string): Promise<IProductDocument> {

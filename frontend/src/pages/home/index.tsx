@@ -1,18 +1,16 @@
-import { Col, Row } from 'antd';
 import React, { useEffect } from 'react';
 import TypeWriter from '@/components/atoms/typeWriter';
-import { useGetAllProducts } from '@/services/product/useGetAllProducts';
-import ProductCard from '@/components/molecules/productCard';
-import LoadingCard from '@/components/atoms/loadingCard';
+import ShowProducts from '@/components/organisms/showProducts';
+import { useGetProducts } from '@/services/product/useGetProducts';
 
 const Home: React.FC = () => {
-  const { data: products, refetch: refetchAllProducts, isLoading } = useGetAllProducts(10);
+  const { mutate: getNewArrival, data: newProducts, isLoading: isLoadingNewProduct } = useGetProducts();
+  const { mutate: getBestSellProduct, data: bestSellProducts, isLoading: isLoadingSellProduct } = useGetProducts();
 
   useEffect(() => {
-    if (!products) {
-      refetchAllProducts();
-    }
-  }, [products, refetchAllProducts]);
+    getNewArrival({ sort: 'createdAt', order: 'desc', limit: 3 });
+    getBestSellProduct({ sort: 'sold', order: 'desc', limit: 3 });
+  }, [getNewArrival, getBestSellProduct]);
 
   return (
     <div className="p-home">
@@ -20,18 +18,8 @@ const Home: React.FC = () => {
         <TypeWriter text={['Latest Products', 'New Arrivals', 'Best Sellers']} />
       </div>
       <div className="p-home__products">
-        {isLoading ? (
-          <LoadingCard count={3} />
-        ) : (
-          <Row gutter={[20, 16]}>
-            {products &&
-              products.map((item: any, indx: number) => (
-                <Col key={indx} xs={24} sm={12} md={8} lg={6}>
-                  <ProductCard item={item} userRole="user" />
-                </Col>
-              ))}
-          </Row>
-        )}
+        <ShowProducts isLoading={isLoadingNewProduct} products={newProducts} message="New Arrivals" />
+        <ShowProducts isLoading={isLoadingSellProduct} products={bestSellProducts} message="Best Sellers" />
       </div>
     </div>
   );

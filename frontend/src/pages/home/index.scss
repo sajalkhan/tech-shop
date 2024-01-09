@@ -1,10 +1,5 @@
 .p-home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: $color-base-whitesmoke;
-  height: auto;
 
   &__heading {
     height: 15rem;
@@ -15,9 +10,5 @@
     font-size: 3.5rem;
     font-weight: bold;
     color: red;
-  }
-
-  &__products {
-    padding: 4rem 8rem 4rem;
   }
 }

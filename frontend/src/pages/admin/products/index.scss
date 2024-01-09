@@ -1,7 +1,14 @@
 .p-products {
-  padding: 4rem 8rem 4rem;
+  padding: 4rem 4rem;
 
   &__heading {
     margin-bottom: 15px;
+  }
+
+  &__items {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
   }
 }

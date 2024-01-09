@@ -1,5 +1,5 @@
 .productCard {
-  width: 100%;
+  width: 28rem;
   margin-bottom: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
@@ -11,11 +11,17 @@
     }
   }
 
-  &__delete {
+  &__delete,
+  &__view,
+  &__shopping {
     color: red !important;
 
     &:hover {
       opacity: 0.6;
+    }
+
+    p {
+      color: $color-base-dimgray;
     }
   }
 }

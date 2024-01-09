@@ -83,6 +83,14 @@ export class Product {
     res.status(HTTP_STATUS.OK).json(product);
   }
 
+  public async productList(req: Request, res: Response): Promise<void> {
+    const { sort, order, limit } = req.body;
+    const products = await productService.getProductList(sort, order, limit);
+    if (!products) throw new BadRequestError('product not found!');
+
+    res.status(HTTP_STATUS.OK).json(products);
+  }
+
   private async uploadImages(images: string[]) {
     try {
       return await Promise.all(images.map((image: string) => this.uploadProductImage(image)));

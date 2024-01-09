@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
-import { Row, Col, Modal, Button, FormInstance } from 'antd';
+import { Modal, Button, FormInstance } from 'antd';
 import EditProductForm from '@/components/molecules/editProduct-form';
 import ProductCard from '@/components/molecules/productCard';
 import { useUpdateProduct } from '@/services/product/useUpdateProduct';
@@ -123,15 +123,12 @@ const Products = () => {
     <div className="p-products">
       <h2 className="p-products__heading">All Products</h2>
 
-      {products && (
-        <Row gutter={[16, 16]}>
-          {products.map((item: any, indx: number) => (
-            <Col key={indx} xs={24} sm={12} md={8} lg={6}>
-              <ProductCard item={item} handleEdit={handleEdit} handleDelete={handleDelete} userRole="admin" />
-            </Col>
+      <div className="p-products__items">
+        {products &&
+          products.map((item: any, indx: number) => (
+            <ProductCard key={indx} item={item} handleEdit={handleEdit} handleDelete={handleDelete} userRole="admin" />
           ))}
-        </Row>
-      )}
+      </div>
 
       {/* Edit Modal */}
       <Modal
