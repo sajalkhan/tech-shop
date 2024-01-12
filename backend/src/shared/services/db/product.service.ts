@@ -7,6 +7,11 @@ class ProductService {
     await ProductModal.create(data);
   }
 
+  public async getTotalProductCount(): Promise<number> {
+    const totalProductCount = await ProductModal.estimatedDocumentCount().exec();
+    return totalProductCount;
+  }
+
   public async getProductsByCount(count: number): Promise<IProductDocument[]> {
     const productList: IProductDocument[] = await ProductModal.find({})
       .limit(count)
@@ -25,12 +30,16 @@ class ProductService {
     return product;
   }
 
-  public async getProductList(sort: string, order: SortOrder, limit: number) {
+  public async getProductList(sort: string, order: SortOrder, pageNumber: number) {
+    const currentPage = pageNumber || 1;
+    const perPage = 3; // 3
+
     const products = await ProductModal.find({})
+      .skip((currentPage - 1) * perPage) // Skips the appropriate number of documents based on the current page and items per page to implement pagination.
       .populate('category')
       .populate('subCategory')
       .sort([[sort, order]])
-      .limit(limit)
+      .limit(perPage)
       .exec();
 
     return products;

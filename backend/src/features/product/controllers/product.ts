@@ -84,11 +84,18 @@ export class Product {
   }
 
   public async productList(req: Request, res: Response): Promise<void> {
-    const { sort, order, limit } = req.body;
-    const products = await productService.getProductList(sort, order, limit);
+    const { sort, order, pageNumber } = req.body;
+    const products = await productService.getProductList(sort, order, pageNumber);
     if (!products) throw new BadRequestError('product not found!');
 
     res.status(HTTP_STATUS.OK).json(products);
+  }
+
+  public async productCount(_req: Request, res: Response): Promise<void> {
+    const totalProducts = await productService.getTotalProductCount();
+    if (!totalProducts) throw new BadRequestError('product not found!');
+
+    res.status(HTTP_STATUS.OK).json(totalProducts);
   }
 
   private async uploadImages(images: string[]) {

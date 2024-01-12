@@ -11,7 +11,7 @@ const LoadingCard: React.FC<LoadingCardProps> = ({ count }) => {
 
     for (let i = 0; i < count; i++) {
       totalCards.push(
-        <Card className="a-loadingCard__card">
+        <Card key={i} className="a-loadingCard__card">
           <Skeleton active />
         </Card>
       );

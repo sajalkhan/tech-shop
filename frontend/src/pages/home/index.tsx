@@ -1,16 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TypeWriter from '@/components/atoms/typeWriter';
 import ShowProducts from '@/components/organisms/showProducts';
 import { useGetProducts } from '@/services/product/useGetProducts';
+import { useGetProductsCount } from '@/services/product/useGetProductsCount';
 
 const Home: React.FC = () => {
+  const [newArrivalPage, setNewArrivalPage] = useState(1);
+  const [bestSellPage, setBestSellPage] = useState(1);
+
+  const { mutate: getTotalProductLength, data: productsCount } = useGetProductsCount();
   const { mutate: getNewArrival, data: newProducts, isLoading: isLoadingNewProduct } = useGetProducts();
   const { mutate: getBestSellProduct, data: bestSellProducts, isLoading: isLoadingSellProduct } = useGetProducts();
 
   useEffect(() => {
-    getNewArrival({ sort: 'createdAt', order: 'desc', limit: 3 });
-    getBestSellProduct({ sort: 'sold', order: 'desc', limit: 3 });
-  }, [getNewArrival, getBestSellProduct]);
+    getTotalProductLength();
+  }, [getTotalProductLength]);
+
+  useEffect(() => {
+    getNewArrival({ sort: 'createdAt', order: 'desc', pageNumber: newArrivalPage });
+  }, [getNewArrival, newArrivalPage]);
+
+  useEffect(() => {
+    getBestSellProduct({ sort: 'sold', order: 'desc', pageNumber: bestSellPage });
+  }, [getBestSellProduct, bestSellPage]);
+
+  const handleNewArrivalPageChange = (value: number) => {
+    setNewArrivalPage(value);
+  };
+
+  const handleBestSellPageChange = (value: number) => {
+    setBestSellPage(value);
+  };
 
   return (
     <div className="p-home">
@@ -18,8 +38,23 @@ const Home: React.FC = () => {
         <TypeWriter text={['Latest Products', 'New Arrivals', 'Best Sellers']} />
       </div>
       <div className="p-home__products">
-        <ShowProducts isLoading={isLoadingNewProduct} products={newProducts} message="New Arrivals" />
-        <ShowProducts isLoading={isLoadingSellProduct} products={bestSellProducts} message="Best Sellers" />
+        <ShowProducts
+          pageNumber={newArrivalPage}
+          message="New Arrivals"
+          products={newProducts}
+          productsCount={productsCount}
+          isLoading={isLoadingNewProduct}
+          handlePage={handleNewArrivalPageChange}
+        />
+
+        <ShowProducts
+          pageNumber={bestSellPage}
+          message="Best Sellers"
+          products={bestSellProducts}
+          productsCount={productsCount}
+          isLoading={isLoadingSellProduct}
+          handlePage={handleBestSellPageChange}
+        />
       </div>
     </div>
   );
