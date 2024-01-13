@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from 'react-query';
+import { useQuery } from 'react-query';
 import axios from '@/utils/axiosConfig';
 import axiosErrorHandler from '@/utils/axiosErrorHandler';
 
@@ -7,21 +7,15 @@ const getProductDetails = async (id: string) => {
     const { data } = await axios.get(`/product/${id}`);
     return data;
   } catch (error: any) {
-    return axiosErrorHandler(error);
+    throw axiosErrorHandler(error);
   }
 };
 
-export const useGetProductDetails = () => {
-  const getProductDetailsQuery = useQuery('productDetails', () => getProductDetails(''), {
-    enabled: false, // Don't automatically fetch data
+export const useGetProductDetails = (id: string) => {
+  return useQuery(['productDetails', id], () => getProductDetails(id), {
+    staleTime: 5000, // stel time used for stop recall api request
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchIntervalInBackground: false,
   });
-
-  const getProductDetailsMutation = useMutation(getProductDetails);
-
-  // Define a function to call the mutate with an id
-  const fetchProductDetails = (id: string) => {
-    getProductDetailsMutation.mutate(id);
-  };
-
-  return { ...getProductDetailsQuery, fetchProductDetails };
 };

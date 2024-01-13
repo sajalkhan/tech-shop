@@ -1,0 +1,27 @@
+.o-singleProduct {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 250px;
+
+  &__imagePreview {
+    width: 400px;
+  }
+
+  &__details {
+    width: 400px;
+
+    &--title {
+      background-color: $color-primary-blue;
+      padding: 3rem;
+    }
+  }
+}
+
+.slider {
+  img {
+    height: 320px;
+    object-fit: cover;
+  }
+}

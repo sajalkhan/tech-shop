@@ -6,6 +6,7 @@ export const ROUTES = {
   USER: '/user',
   ADMIN: '/admin',
   PRODUCT: '/admin/product',
+  VIEW_PRODUCT: '/product/:id',
   PRODUCTS: '/admin/products',
   CATEGORY: '/admin/category',
   SUB_CATEGORY: '/admin/sub',

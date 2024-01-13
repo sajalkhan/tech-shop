@@ -26,7 +26,10 @@ class ProductService {
   public async getProductById(id: string): Promise<IProductDocument> {
     const product: IProductDocument = (await ProductModal.findOne({
       _id: id
-    }).exec()) as IProductDocument;
+    })
+      .populate('category')
+      .populate('subCategory')
+      .exec()) as IProductDocument;
     return product;
   }
 

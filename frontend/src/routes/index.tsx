@@ -11,6 +11,7 @@ const Login = lazy(() => import('@/pages/login'));
 const Register = lazy(() => import('@/pages/register'));
 const User = lazy(() => import('@/pages/user'));
 const Admin = lazy(() => import('@/pages/admin'));
+const ViewProduct = lazy(() => import('@/pages/viewProduct'));
 const ForgotPassword = lazy(() => import('@/pages/forgotPassword'));
 const ResetPassword = lazy(() => import('@/pages/resetPassword'));
 
@@ -27,8 +28,9 @@ export const AppRouter = () => (
       <Route path={ROUTES.HOME} element={<Home />} />
       <Route path={ROUTES.LOGIN} element={<Login />} />
       <Route path={ROUTES.REGISTER} element={<Register />} />
-      <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+      <Route path={ROUTES.VIEW_PRODUCT} element={<ViewProduct />} />
       <Route path={ROUTES.RESET_PASSWORD} element={<ResetPassword />} />
+      <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
       <Route path={ROUTES.USER} element={<UserRoute>{<User />}</UserRoute>} />
       <Route path={ROUTES.ADMIN} element={<AdminRoute>{<Admin />}</AdminRoute>} />
     </Routes>

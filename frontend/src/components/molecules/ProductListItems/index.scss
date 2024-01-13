@@ -1,0 +1,25 @@
+.m-productList {
+  list-style: none;
+
+  &__price,
+  &__shipping,
+  &__color,
+  &__brand,
+  &__quantity,
+  &__sold {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem;
+  }
+
+  &__category,
+  &__subCategory {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem;
+
+    &--item {
+      color: $color-primary-blue;
+    }
+  }
+}
