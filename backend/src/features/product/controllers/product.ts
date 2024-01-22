@@ -3,6 +3,7 @@ import { MongoError } from 'mongodb';
 import { Request, Response } from 'express';
 import HTTP_STATUS from 'http-status-codes';
 import { uploads } from '@global/helpers/coludinary-upload';
+import { authService } from '@service/db/auth.service';
 import { productService } from '@service/db/product.service';
 import { BadRequestError } from '@global/helpers/error-handler';
 import { ProductValidationSchema } from '@product/validation-schema/product';
@@ -89,6 +90,24 @@ export class Product {
     if (!products) throw new BadRequestError('product not found!');
 
     res.status(HTTP_STATUS.OK).json(products);
+  }
+
+  public async productRating(req: Request, res: Response): Promise<void> {
+    try {
+      const { star, productId } = req.body;
+      const userEmail = req.currentUser!.email;
+
+      const user = await authService.getAuthUserByEmail(userEmail);
+      const updatedProduct = await productService.updateProductRating(star, productId, user);
+
+      if (!updatedProduct) {
+        throw new BadRequestError('Product Rating update failed!');
+      }
+
+      res.status(HTTP_STATUS.OK).json(updatedProduct);
+    } catch (error) {
+      throw new BadRequestError('Internal Server Error');
+    }
   }
 
   public async productCount(_req: Request, res: Response): Promise<void> {

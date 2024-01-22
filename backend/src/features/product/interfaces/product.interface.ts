@@ -13,4 +13,8 @@ export interface IProductDocument extends Document {
   shipping: string;
   color: string;
   brand: string;
+  ratings: Array<{
+    star: number;
+    postedBy: string | Types.ObjectId;
+  }>;
 }

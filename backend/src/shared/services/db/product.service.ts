@@ -1,6 +1,7 @@
 import { SortOrder } from 'mongoose';
-import { IProductDocument } from '@product/interfaces/product.interface';
 import { ProductModal } from '@product/models/product.schema';
+import { IUserDocument } from '@auth/interfaces/user.interface';
+import { IProductDocument } from '@product/interfaces/product.interface';
 
 class ProductService {
   public async createProduct(data: IProductDocument): Promise<void> {
@@ -60,6 +61,31 @@ class ProductService {
       new: true
     }).exec()) as IProductDocument;
     return product;
+  }
+
+  public async updateProductRating(star: number, productId: string, user: IUserDocument) {
+    try {
+      const product: IProductDocument | null = await ProductModal.findById(productId);
+      if (!product) return null;
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const existingRatingObject: any = product.ratings.find((ele: any) => ele.postedBy.toString() === user._id.toString());
+
+      if (!existingRatingObject) {
+        // If user hasn't left a rating yet, push it
+        product.ratings.push({ star, postedBy: user._id });
+      } else {
+        // If the user has already left a rating, update it
+        existingRatingObject.star = star;
+      }
+
+      const updatedProduct = await product.save();
+      return updatedProduct;
+    } catch (error) {
+      // Handle errors appropriately
+      console.error('Error updating product rating:', error);
+      throw error;
+    }
   }
 }
 
