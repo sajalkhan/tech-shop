@@ -110,6 +110,14 @@ export class Product {
     }
   }
 
+  public async relatedProduct(req: Request, res: Response): Promise<void> {
+    const productId = req.params.productId;
+    const relatedProduct = await productService.getRelatedProduct(productId);
+
+    if (!relatedProduct) throw new BadRequestError('Product not found!');
+    res.status(HTTP_STATUS.OK).json(relatedProduct);
+  }
+
   public async productCount(_req: Request, res: Response): Promise<void> {
     const totalProducts = await productService.getTotalProductCount();
     if (!totalProducts) throw new BadRequestError('product not found!');

@@ -7,9 +7,9 @@ interface IShowProducts {
   isLoading: boolean;
   message: string;
   products: any;
-  pageNumber: number;
-  productsCount: number;
-  handlePage: (page: number) => void;
+  pageNumber?: number;
+  productsCount?: number;
+  handlePage?: (page: number) => void;
 }
 
 const ShowProducts: React.FC<IShowProducts> = ({

@@ -34,6 +34,29 @@ class ProductService {
     return product;
   }
 
+  public async getRelatedProduct(id: string) {
+    try {
+      const product: IProductDocument | null = await ProductModal.findById(id).exec();
+      if (!product) return null;
+
+      const relatedProduct = await ProductModal.find({
+        _id: { $ne: product._id },
+        category: product.category
+      })
+        .limit(3)
+        .populate('category subCategory')
+        .populate({
+          path: 'ratings.postedBy',
+          model: 'user'
+        })
+        .exec();
+
+      return relatedProduct;
+    } catch (error) {
+      return null;
+    }
+  }
+
   public async getProductList(sort: string, order: SortOrder, pageNumber: number) {
     const currentPage = pageNumber || 1;
     const perPage = 3; // 3

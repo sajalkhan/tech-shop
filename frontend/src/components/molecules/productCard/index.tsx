@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
+import ShowAverage from '@/components/atoms/averageRating';
 import { EyeOutlined, ShoppingCartOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 type item = {
@@ -23,7 +24,7 @@ const ProductCard: React.FC<IProductCard> = ({ item, handleEdit, handleDelete, u
   const actions =
     userRole === 'admin'
       ? [
-          <EditOutlined key="edit" className="productCard__edit" onClick={() => handleEdit && handleEdit(item)} />,
+          <EditOutlined key="edit" className="m-productCard__edit" onClick={() => handleEdit && handleEdit(item)} />,
           <Popconfirm
             key="delete"
             title="Delete this item"
@@ -33,27 +34,34 @@ const ProductCard: React.FC<IProductCard> = ({ item, handleEdit, handleDelete, u
             okText="Yes"
             cancelText="No"
           >
-            <DeleteOutlined className="productCard__delete" />
+            <DeleteOutlined className="m-productCard__delete" />
           </Popconfirm>,
         ]
       : [
-          <Link key="view" className="productCard__view" to={`/product/${_id}`}>
+          <Link key="view" className="m-productCard__view" to={`/product/${_id}`}>
             <EyeOutlined />
             <p>View Product</p>
           </Link>,
-          <div key="shopping" className="productCard__shopping">
+          <div key="shopping" className="m-productCard__shopping">
             <ShoppingCartOutlined />
             <p>Add To Cart</p>
           </div>,
         ];
 
   return (
-    <Card cover={<img src={images[0]} alt={title} draggable={false} />} className="productCard" actions={actions}>
-      <Card.Meta
-        title={title}
-        description={description && description.length > 40 ? `${description.substring(0, 40)}...` : description}
-      />
-    </Card>
+    <div className="m-productCard">
+      <ShowAverage product={item} size="small" />
+      <Card
+        cover={<img src={images[0]} alt={title} draggable={false} />}
+        className="m-productCard__item"
+        actions={actions}
+      >
+        <Card.Meta
+          title={title}
+          description={description && description.length > 40 ? `${description.substring(0, 40)}...` : description}
+        />
+      </Card>
+    </div>
   );
 };
 

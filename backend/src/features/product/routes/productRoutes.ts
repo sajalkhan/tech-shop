@@ -20,6 +20,7 @@ class ProductRoutes {
     this.router.get('/product/:id', this.product.productDetails.bind(this.product));
     this.router.put('/product/:title', authMiddleware.verifyUser, authMiddleware.checkAdmin, this.product.update.bind(this.product));
     this.router.put('/productRating', authMiddleware.verifyUser, this.product.productRating.bind(this.product));
+    this.router.get('/product/related/:productId', this.product.relatedProduct.bind(this.product));
 
     this.router.post('/products', this.product.productList.bind(this.product));
     return this.router;

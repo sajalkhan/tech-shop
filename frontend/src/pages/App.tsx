@@ -3,6 +3,7 @@ import React, { useEffect, useCallback } from 'react';
 import { AppRouter } from '@/routes';
 import { ROUTES } from '@/routes/constant';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useUserStore } from '@/store/useUserStore';
 import Navigation from '@/components/atoms/navigation';
 import { useLogoutUser } from '@/services/auth/useLogoutUser';
@@ -12,6 +13,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import useLocalStorage from '@/hooks/useLocalStorage';
 
 const App: React.FC = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const { mutate: logoutUser } = useLogoutUser();
   const { addUser, removeUser } = useUserStore();
@@ -20,6 +22,10 @@ const App: React.FC = () => {
 
   const { data: userDetails, refetch: refetchUserInfo } = useGetCurrentUserInfo();
   const handleRoute = useCallback((e: { key: React.Key }) => navigate(`${e.key}`), []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
     if (!userDetails?.isUser && token) refetchUserInfo();
