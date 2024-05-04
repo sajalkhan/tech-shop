@@ -12,6 +12,8 @@ const Register = lazy(() => import('@/pages/register'));
 const User = lazy(() => import('@/pages/user'));
 const Admin = lazy(() => import('@/pages/admin'));
 const ViewProduct = lazy(() => import('@/pages/viewProduct'));
+const CategoryHome = lazy(() => import('@/pages/home/category'));
+const SubCategoryHome = lazy(() => import('@/pages/home/sub-category'));
 const ForgotPassword = lazy(() => import('@/pages/forgotPassword'));
 const ResetPassword = lazy(() => import('@/pages/resetPassword'));
 
@@ -33,6 +35,8 @@ export const AppRouter = () => (
       <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
       <Route path={ROUTES.USER} element={<UserRoute>{<User />}</UserRoute>} />
       <Route path={ROUTES.ADMIN} element={<AdminRoute>{<Admin />}</AdminRoute>} />
+      <Route path={ROUTES.SUB_CATEGORY_HOME} element={<SubCategoryHome />} />
+      <Route path={ROUTES.CATEGORY_HOME} element={<CategoryHome />} />
     </Routes>
   </Suspense>
 );

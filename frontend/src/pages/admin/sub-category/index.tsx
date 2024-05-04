@@ -7,7 +7,7 @@ import { useEditSubCategory } from '@/services/subCategory/useEditSubCategory';
 import { useDeleteSubCategory } from '@/services/subCategory/useDeleteSubCategory';
 import { useGetAllCategories } from '@/services/category/useGetAllCategories';
 import { useAddSubCategory } from '@/services/subCategory/useAddSubCategory';
-import { useGetAllSubCategories } from '@/services/subCategory/useGetAllCategories';
+import { useGetAllSubCategories } from '@/services/subCategory/useGetAllSubCategories';
 import { useGetSubCategoryByCategoryId } from '@/services/subCategory/useGetSubCategoryById';
 
 const SubCategory = () => {

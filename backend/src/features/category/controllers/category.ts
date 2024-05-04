@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import slugify from 'slugify';
 import { Request, Response } from 'express';
 import HTTP_STATUS from 'http-status-codes';
@@ -59,5 +60,17 @@ export class Category {
     if (!allCategory) throw new BadRequestError('No Category Found!');
 
     res.status(HTTP_STATUS.OK).json(allCategory);
+  }
+
+  public async getAllProductByCategory(req: Request, res: Response): Promise<void> {
+    try {
+      const { slug } = req.params;
+      const product = await categoryService.getAllProductByCategory(slug);
+      if (!product.category) throw new Error('No Category Found!');
+
+      res.status(HTTP_STATUS.OK).json(product);
+    } catch (error: any) {
+      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    }
   }
 }

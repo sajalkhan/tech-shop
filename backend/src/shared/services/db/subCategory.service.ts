@@ -1,7 +1,9 @@
 import slugify from 'slugify';
 import mongoose from 'mongoose';
 import { ISubCategoryDocument } from '@category/interfaces/subCategory.interface';
+import { IProductDocument } from '@product/interfaces/product.interface';
 import { SubCategoryModal } from '@category/models/subCategory.schema';
+import { ProductModal } from '@product/models/product.schema';
 
 class subCategoryService {
   public async createSubCategory(data: ISubCategoryDocument): Promise<void> {
@@ -51,6 +53,20 @@ class subCategoryService {
     }
 
     return subCategories;
+  }
+
+  public async getAllProductBySubCategory(
+    type: string
+  ): Promise<{ subCategory: ISubCategoryDocument | null; products: IProductDocument[] }> {
+    const subCategory: ISubCategoryDocument | null = await SubCategoryModal.findOne({
+      slug: { $regex: '^' + type + '$', $options: 'i' }
+    }).exec();
+    if (!subCategory) {
+      return { subCategory: null, products: [] };
+    }
+
+    const products: IProductDocument[] = await ProductModal.find({ subCategory }).populate('subCategory').exec();
+    return { subCategory, products };
   }
 }
 

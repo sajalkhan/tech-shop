@@ -1,0 +1,38 @@
+.category-list {
+  margin: 5rem 0;
+
+  &__heading {
+    height: 6rem;
+    width: 100%;
+    text-align: center;
+    line-height: 6rem;
+    background-color: $color-grey-10;
+    font-size: 35px;
+  }
+
+  &__items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    gap: 20px;
+
+    &--name {
+      min-width: 100px;
+      padding: 2px 20px;
+      text-align: center;
+      font-weight: bold;
+      color: $color-base-royalblue;
+      text-transform: uppercase;
+      border-radius: 5px;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+      &:hover {
+        opacity: 0.7;
+        background: $color-base-ghostwhite;
+        transition: opacity 0.3s ease;
+      }
+    }
+  }
+}

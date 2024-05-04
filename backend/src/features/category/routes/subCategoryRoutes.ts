@@ -14,6 +14,7 @@ class SubCategoryRoutes {
     this.router.post('/subCategoriesById', SubCategory.prototype.subCategoryListByParentId);
     this.router.get('/subCategories', SubCategory.prototype.subCategoryList);
     this.router.get('/subCategory/:slug', SubCategory.prototype.red);
+    this.router.get('/product/subCategory/:slug', SubCategory.prototype.getAllProductBySubCategory);
     this.router.put('/subCategory/:slug', authMiddleware.verifyUser, authMiddleware.checkAdmin, SubCategory.prototype.update);
     this.router.delete('/subCategory/:slug', authMiddleware.verifyUser, authMiddleware.checkAdmin, SubCategory.prototype.delete);
     return this.router;

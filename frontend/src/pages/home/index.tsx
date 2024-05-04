@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import TypeWriter from '@/components/atoms/typeWriter';
+import CategoryList from '@/components/molecules/categoryList';
 import ShowProducts from '@/components/organisms/showProducts';
 import { useGetProducts } from '@/services/product/useGetProducts';
 import { useGetProductsCount } from '@/services/product/useGetProductsCount';
+import { useGetAllCategories } from '@/services/category/useGetAllCategories';
+import { useGetAllSubCategories } from '@/services/subCategory/useGetAllSubCategories';
 
 const Home: React.FC = () => {
   const [newArrivalPage, setNewArrivalPage] = useState(1);
@@ -10,7 +13,13 @@ const Home: React.FC = () => {
 
   const { mutate: getTotalProductLength, data: productsCount } = useGetProductsCount();
   const { mutate: getNewArrival, data: newProducts, isLoading: isLoadingNewProduct } = useGetProducts();
+  const { data: categories, refetch: refetchAllCategories, isLoading: isLoadingCategory } = useGetAllCategories();
   const { mutate: getBestSellProduct, data: bestSellProducts, isLoading: isLoadingSellProduct } = useGetProducts();
+  const {
+    data: subCategories,
+    refetch: refetchAllSubCategories,
+    isLoading: isLoadingSubCategory,
+  } = useGetAllSubCategories();
 
   useEffect(() => {
     getTotalProductLength();
@@ -23,6 +32,11 @@ const Home: React.FC = () => {
   useEffect(() => {
     getBestSellProduct({ sort: 'sold', order: 'desc', pageNumber: bestSellPage });
   }, [getBestSellProduct, bestSellPage]);
+
+  useEffect(() => {
+    !categories && refetchAllCategories();
+    !subCategories && refetchAllSubCategories();
+  }, [categories, subCategories, refetchAllCategories, refetchAllSubCategories]);
 
   const handleNewArrivalPageChange = (value: number) => {
     setNewArrivalPage(value);
@@ -54,6 +68,14 @@ const Home: React.FC = () => {
           productsCount={productsCount}
           isLoading={isLoadingSellProduct}
           handlePage={handleBestSellPageChange}
+        />
+
+        <CategoryList path="category" isLoading={isLoadingCategory} message="Categories" categories={categories} />
+        <CategoryList
+          path="subcategory"
+          message="Sub Categories"
+          categories={subCategories}
+          isLoading={isLoadingSubCategory}
         />
       </div>
     </div>

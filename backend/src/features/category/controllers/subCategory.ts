@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import slugify from 'slugify';
 import { Request, Response } from 'express';
 import HTTP_STATUS from 'http-status-codes';
@@ -66,5 +67,17 @@ export class SubCategory {
     const allSubCategory = await SubCategoryService.getAllSubCategoryByParentId(parent);
 
     res.status(HTTP_STATUS.OK).json(allSubCategory);
+  }
+
+  public async getAllProductBySubCategory(req: Request, res: Response): Promise<void> {
+    try {
+      const { slug } = req.params;
+      const product = await SubCategoryService.getAllProductBySubCategory(slug);
+      if (!product.subCategory) throw new Error('No Sub Category Found!');
+
+      res.status(HTTP_STATUS.OK).json(product);
+    } catch (error: any) {
+      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    }
   }
 }
